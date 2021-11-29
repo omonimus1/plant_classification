@@ -1,5 +1,5 @@
 # Classifying-Iris-flower-species
-This project is focused on the use, training and validation of a Flower Specier classification usign different classification algorithms
+This project is focused on the use, training and validation of a Flower Specier classification using different classification algorithms
 
 #### Dataset used
 
