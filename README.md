@@ -13,4 +13,5 @@ Iris flowers:  nominal values, which includes details about: petal length and wi
 * [10 flowers species dataset](https://www.kaggle.com/olgabelitskaya/flower-color-images)
 
 
-
+## Attention
+If you need more material like this, [nominate me as github start, to get help the project to gain more visibility and contributions](https://stars.github.com/program/)
