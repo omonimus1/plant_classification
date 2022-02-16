@@ -1,17 +1,40 @@
-# Classifying-Iris-flower-species
-This project is focused on the use, training and validation of a Flower Specier classification using different classification algorithms
+# greenr 🍃
+A web app to tell whether your image is a dandelion or grass.
 
-#### Dataset used
+Adds more swap space if required
+```
+sudo bash swap.sh
+```
 
-Iris flowers:  nominal values, which includes details about: petal length and width, Sedal length and Width and Species.
-
-## Colab notebook references
-[https://colab.research.google.com/drive/1EOG7nx9de0OsxSDYW-HBhDDWdTikT7VC](https://colab.research.google.com/drive/1EOG7nx9de0OsxSDYW-HBhDDWdTikT7VC)
-
-## Use of CNN for Image classification 
-* [Example Of CNN Application in Flower Classification](https://cainvas.ai-tech.systems/use-cases/flower-classification-app-2/)
-* [10 flowers species dataset](https://www.kaggle.com/olgabelitskaya/flower-color-images)
-
-
-## Attention
-If you need more material like this, [nominate me as github start, to get help the project to gain more visibility and contributions](https://stars.github.com/program/)
+```
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+```
+Adds docker official GPG key:
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+Adds stable repo
+```
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+```
+Install docker and docker-compose
+```
+sudo apt-get install docker docker-compose
+```
+Build docker image
+```
+sudo docker image build -t app:latest .
+```
+Run 
+```
+sudo docker run -d -p 80:8008 app:latest
+```
