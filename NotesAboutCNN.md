@@ -19,3 +19,4 @@ Pooling merely means down sampling of an image. It takes small region of the con
 * Fully Connected Layer:
 
 * Fully connected (FC) layers are always used as the last layers of a CNN. This layer takes input from all neurons in the previous layer and performs arithmetic sum of the preceding layer of features with individual neuron in the current layer to generate output
+

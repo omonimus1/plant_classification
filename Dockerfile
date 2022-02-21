@@ -4,8 +4,7 @@ RUN apt update
 RUN apt install -y python3-dev gcc
 
 ADD requirements.txt requirements.txt
-# . ADD export.pkl export.pkl
-# . ADD saved_model.pb  saved_model.pb 
+# ADD export.pkl export.pkl
 ADD app.py app.py
 
 # Install required libraries
