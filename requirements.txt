@@ -2,3 +2,4 @@ Django
 numpy
 whitenoise
 tensorflow
+matplotlib
