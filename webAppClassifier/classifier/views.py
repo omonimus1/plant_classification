@@ -33,6 +33,11 @@ from keras.preprocessing.image import ImageDataGenerator,load_img, img_to_array
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from keras import optimizers
+
+## Define models and load
+import pickle
+model = Sequential()
+model = pickle.load(open('/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/classifier.pkl', 'rb'))
 flower_identification = {
     0: 'Dandelion',
     1: 'Tulip',
@@ -40,24 +45,27 @@ flower_identification = {
     3: 'Daisy',
     4: 'Sunflower'
 }
-model = Sequential()
-img_path = "/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/static/i/sunflower.jpeg"
-# plt.show(img_path)
-img = image.load_img(img_path, target_size=(150, 150))
-img_array = image.img_to_array(img)
-img_batch = np.expand_dims(img_array, axis=0)
-# img_preprocessed = preprocess_input(img_batch)
 
-# load model here 
-prediction = model.predict(img_batch)
-pred_digits=np.argmax(prediction,axis=1)
-print(pred_digits)
-# Name of the predicted flower
-# print('Plant name: ' + flower_identification[pred_digits[0]])
-# Get Percentage of predictions 
-predict_classes=np.argmax(prediction,axis=1)
-print(predict_classes)
-# Predict model
+def identify_flower():
+
+    img_path = "/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/static/i/sunflower.jpeg"
+    # plt.show(img_path)
+    img = image.load_img(img_path, target_size=(150, 150))
+    img_array = image.img_to_array(img)
+    img_batch = np.expand_dims(img_array, axis=0)
+    # img_preprocessed = preprocess_input(img_batch)
+
+    # load model here 
+    prediction = model.predict(img_batch)
+    pred_digits=np.argmax(prediction,axis=1)
+    print(pred_digits)
+    # Name of the predicted flower
+    # print('Plant name: ' + flower_identification[pred_digits[0]])
+    # Get Percentage of predictions 
+    predict_classes=np.argmax(prediction,axis=1)
+    print(predict_classes)
+    # Predict model
 
 def Home(request):
+    identify_flower()
     return render(request, 'index.html')
