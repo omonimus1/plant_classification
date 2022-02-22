@@ -3,3 +3,5 @@ numpy
 whitenoise
 tensorflow
 matplotlib
+opencv-python
+pandas
