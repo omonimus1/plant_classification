@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 
-
+"""
 img_path = "/content/gdrive/Othercomputers/DavideLaptop/Desktop/flowersData/sunflower/23286304156_3635f7de05.jpg"
 plt.show(img_path)
 img = image.load_img(img_path, target_size=(150, 150))
@@ -25,6 +25,6 @@ print('Plant name: ' + flower_identification[pred_digits[0]])
 predict_classes=np.argmax(prediction,axis=1)
 print(predict_classes)
 # Predict model
-
+"""
 def Home(request):
     return render(request, 'index.html')
