@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -8,17 +9,22 @@
         <link href="{% static 'css\base.css' %}" rel='stylesheet'>
     </head>
     <body>
+        {% block content %}
+
+    <section style="padding-left: 100px; padding-right:100px; padding-bottom:50px; ">
         <div id="header">
             <span class='logo'>Image Uploader</span>
         </div>
-        <div id="form">
+        <div id="form" id="classifier">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ profile_form.as_p }}
-                <button type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
-        
+    </section>
         
     </body>
+    {% endblock content %}
+
 </html>
