@@ -6,3 +6,4 @@ matplotlib
 opencv-python
 pandas
 pillow
+django_rest_framework
