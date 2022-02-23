@@ -6,14 +6,7 @@ from .models import Prediction
 
 # Create your views here.
 def Index(request):
-    if request.method == 'POST':
-        profile_form = ProfileForm(data=request.POST, files=request.FILES)
-        
-        if profile_form.is_valid():
-            profile_form.save()
-    else:
-        profile_form = ProfileForm()
-    return render(request, 'index.html',{'profile_form': profile_form})
+    return render(request, 'index.html')
 
 def ImageView(request):
     if request.method == 'POST':

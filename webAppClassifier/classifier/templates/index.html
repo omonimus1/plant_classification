@@ -70,7 +70,7 @@
 							</a>
 						</div>
 						<div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-end align-items-center">
-							<a href="#classifier" class="btn sm action-1">Recognize flower</a>
+							<a href="upload" class="btn sm action-1">Recognize flower</a>
 						</div>
 					</div>
 				</div>
@@ -150,13 +150,7 @@
 				<div class="mt-25 mb-75 f-22 color-heading text-adaptive description">Upload an image and classify a flower among: roses, sunflower, dandelion, tulip, or daisy.
 				</div>
 				<div class="mb-40 mb-md-0 d-sm-flex align-items-center buttons">
-					<div id="form">
-						<form method="post" enctype="multipart/form-data">
-							{% csrf_token %}
-							{{ profile_form.as_p }}
-							<button type="submit">Submit</button>
-						</form>
-					</div>
+					<a href="upload" class="btn sm action-1">Recognize flower</a>
 				</div>
 			</div>
 			<div class="col-lg-1 d-none d-lg-block">
@@ -166,8 +160,7 @@
 				<div class="row">
 					<div class="mb-80 col-md-12 col-sm-6 d-lg-flex align-items-start block">
 						<div class="inner">
-							
-							<p>image</p>
+							<img src="https://logodix.com/logo/569600.png" style="height: 200px; width:200px;" alt="flower image">
 						</div>
 					</div>
 				</div>
