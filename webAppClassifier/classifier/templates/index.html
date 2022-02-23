@@ -150,13 +150,15 @@
 				<div class="mt-25 mb-75 f-22 color-heading text-adaptive description">Upload an image and classify a flower among: roses, sunflower, dandelion, tulip, or daisy.
 				</div>
 				<div class="mb-40 mb-md-0 d-sm-flex align-items-center buttons">
-					<form class="md-form">
-						<div class="file-field">
-						  <div class="btn btn-primary btn-sm float-left">
-							<input type="file">
-						  </div>
-						</div>
+					<form method="post" action='verification' enctype="multipart/form-data">
+						{% csrf_token %}
+						 {{ form.as_p }}
+						<button type="submit">Upload</button>
 					  </form>
+					  {% if img_obj %}
+						<h3>Succesfully uploaded : {{img_obj.title}}</h3>
+						<img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+					  {% endif %}
 				</div>
 			</div>
 			<div class="col-lg-1 d-none d-lg-block">
@@ -179,7 +181,7 @@
 		<!-- Contact 2 -->
 		<section class="pt-80 pb-70 bg-light text-center contact_2" id="contact">
 			<div class="container px-xl-0">
-				<form action="form-handler.php" method="post">
+				<form action="" method="post">
 					<div class="row justify-content-center">
 						<div class="col-xl-6 col-lg-8 col-md-10">
 							<div class="f-14 semibold text-uppercase sp-20 color-heading">Get Started</div>
@@ -267,19 +269,6 @@
 			</div>
 		</footer>
 
-		<!-- forms alerts -->
-		<div class="alert alert-success alert-dismissible fixed-top alert-form-success" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			Thanks for your message!
-		</div>
-		<div class="alert alert-warning alert-dismissible fixed-top alert-form-check-fields" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			Please, fill in required fields.
-		</div>
-		<div class="alert alert-danger alert-dismissible fixed-top alert-form-error" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<div class="message">An error occurred while sending data :( Please, check if your hosting supports PHP and check how to set form data sending <a href="https://designmodo.com/startup/documentation/#form-handler" target="_blank" class="link color-transparent-white">here</a>.</div>
-		</div>
 
 		<!-- gReCaptcha popup (uncomment if you need a recaptcha integration) -->
 		<!--

@@ -33,7 +33,6 @@ from keras.preprocessing.image import ImageDataGenerator,load_img, img_to_array
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from keras import optimizers
-
 ## Define models and load
 import pickle
 model = Sequential()
@@ -45,6 +44,10 @@ flower_identification = {
     3: 'Daisy',
     4: 'Sunflower'
 }
+
+
+from django.shortcuts import render
+from .forms import ImageForm
 
 def identify_flower():
 
@@ -66,6 +69,32 @@ def identify_flower():
     print(predict_classes)
     # Predict model
 
+
 def Home(request):
-    identify_flower()
-    return render(request, 'index.html')
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'index.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = ImageForm()
+    return render(request, 'index.html', {'form': form})
+
+def upload(request):
+    print('inside upload')
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        form.save()
+        print('saved form')
+        # Get the current instance object to display in the template
+        img_obj = form.instance
+        print('returned image')
+        return render(request, 'index.html', {'form': form, 'img_obj': img_obj})
+    else:
+        print('not inside POST upload section')
+        form = ImageForm()
+    return render(request, 'index.html', {'form': form})
