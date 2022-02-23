@@ -4,6 +4,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', Home),
-    path('verification', upload),
+    path('', Index, name='index'),
+    path('upload', ImageView, name='upload'),
+    path('img/', Display, name='display')
 ]

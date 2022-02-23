@@ -150,23 +150,23 @@
 				<div class="mt-25 mb-75 f-22 color-heading text-adaptive description">Upload an image and classify a flower among: roses, sunflower, dandelion, tulip, or daisy.
 				</div>
 				<div class="mb-40 mb-md-0 d-sm-flex align-items-center buttons">
-					<form method="post" action='verification' enctype="multipart/form-data">
-						{% csrf_token %}
-						 {{ form.as_p }}
-						<button type="submit">Upload</button>
-					  </form>
-					  {% if img_obj %}
-						<h3>Succesfully uploaded : {{img_obj.title}}</h3>
-						<img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
-					  {% endif %}
+					<div id="form">
+						<form method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							{{ profile_form.as_p }}
+							<button type="submit">Submit</button>
+						</form>
+					</div>
 				</div>
 			</div>
 			<div class="col-lg-1 d-none d-lg-block">
+			
 			</div>
 			<div class="col-xl-4 col-lg-5 col-md-4">
 				<div class="row">
 					<div class="mb-80 col-md-12 col-sm-6 d-lg-flex align-items-start block">
 						<div class="inner">
+							
 							<p>image</p>
 						</div>
 					</div>
