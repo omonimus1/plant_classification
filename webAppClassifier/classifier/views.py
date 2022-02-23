@@ -2,7 +2,7 @@ from re import template
 from django.shortcuts import render
 from django.views.generic import DetailView
 from .forms import ProfileForm
-from .models import Profile
+from .models import Prediction
 
 # Create your views here.
 def Index(request):
