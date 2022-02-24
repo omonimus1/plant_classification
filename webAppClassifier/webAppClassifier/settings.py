@@ -56,7 +56,7 @@ ROOT_URLCONF = 'webAppClassifier.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,9 +129,8 @@ STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
 
 
 # Base url to serve media files
-
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MAX_UPLOAD_SIZE = 150100
 
 ALLOWED_IMAGE_TYPES = ['image/png','image/jpeg','image/gif']

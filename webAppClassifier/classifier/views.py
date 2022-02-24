@@ -69,6 +69,7 @@ def ImageView(request):
             # image_array = asarray(img_obj)
             # img = image.load_img('http://127.0.0.1:8000'+img_obj.image.url, target_size=(150, 150))
             # picture = open('http://127.0.0.1:8000'+img_obj.image.url)
+            """
             picture = os.path.join(os.path.dirname(os.path.dirname('http://127.0.0.1:8000'+img_obj.image.url)))
             img = image.load_img(picture, target_size=(150, 150))
             img_array = image.img_to_array(img)
@@ -76,6 +77,7 @@ def ImageView(request):
             prediction = model.predict(img_batch)
             pred_digits=np.argmax(prediction,axis=1)
             print(pred_digits)
+            """
             return render(request, 'upload.html', {'profile_form': profile_form, 'img_obj': img_obj})
     else:
         profile_form = ProfileForm()
