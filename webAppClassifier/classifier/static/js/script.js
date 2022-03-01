@@ -45,25 +45,25 @@ function SF_scripts(){
 	$(".close_menu, header, section, footer, .navigation_mobile .inner a").click(function(event){
 		$(".navigation_mobile").removeClass("opened");
 	});
-	
+
 	// Set | remove z-index for sections, that has dropdown
-	
+
 	function SF_dropdown_parent(dropdown){
 		// Find dropdown's parent nav|header|section|footer
 		var section = dropdown;
 		var noBreak = true;
 		while(noBreak){
 			if(
-				section[0].tagName=="NAV" || 
-				section[0].tagName=="HEADER" || 
-				section[0].tagName=="SECTION" || 
-				section[0].tagName=="FOOTER" || 
+				section[0].tagName=="NAV" ||
+				section[0].tagName=="HEADER" ||
+				section[0].tagName=="SECTION" ||
+				section[0].tagName=="FOOTER" ||
 				section[0].tagName=="BODY"
 			){
 				noBreak = false;
 				break;
 			}else{
-				section = section.parent();				
+				section = section.parent();
 			}
 		}
 		return section;
@@ -82,19 +82,19 @@ function SF_scripts(){
 		});
 		return [zIndex, section];
 	}
-	
+
 	// Set highest z-index for section, that has opened dropdown
 	$(".dropdown").on("show.bs.dropdown", function () {
 		var section = SF_dropdown_parent($(this));
-		section.css("z-index",SF_highest_zIndex()[0]+1);	
+		section.css("z-index",SF_highest_zIndex()[0]+1);
 	});
-	
+
 	// Remove z-index for section, where dropdown was closed
 	$(".dropdown").on("hidden.bs.dropdown", function () {
 		var section = SF_dropdown_parent($(this));
-		section.css("z-index","auto");	
+		section.css("z-index","auto");
 	})
-	
+
 	// Navigation dropdown popup
 
 	if($(".js-nav-dropdowns").length>0){
@@ -104,7 +104,7 @@ function SF_scripts(){
 				$(".js-open-nav-dropdown i.fa-flip-vertical").removeClass("fa-flip-vertical");
 			}
 		});
-		
+
 		$(".js-nav-dropdowns .js-open-nav-dropdown").click(function(event){
 			event.preventDefault();
 			var id = $(".js-nav-dropdowns .js-open-nav-dropdown").index($(this));
@@ -114,14 +114,14 @@ function SF_scripts(){
 			}else{
 				$(".navigation_popup.opened").removeClass("opened");
 				$(".js-open-nav-dropdown i.fa-flip-vertical").removeClass("fa-flip-vertical");
-				$(".navigation_popup").eq(id).addClass("opened");			
+				$(".navigation_popup").eq(id).addClass("opened");
 				$(this).find("i").addClass("fa-flip-vertical");
 				var section = SF_dropdown_parent($(this));
-				section.css("z-index",SF_highest_zIndex()[0]+1);				
+				section.css("z-index",SF_highest_zIndex()[0]+1);
 			}
 		});
 	}
-	
+
 	// Enable AOS plugin (blocks animations)
 
 	if(typeof(AOS) !== 'undefined' && $("body").hasClass("SFG_body")===false){
@@ -138,13 +138,13 @@ function SF_scripts(){
 	}
 
 	// AJAX send form
-	
+
 	var grecaptchaWidgetID;
-	
+
 	$("form:not(.SFG)").submit(function(event){
-		
+
 		event.preventDefault();
-	 
+
 		var form = $(this);
 		var grecaptchaContainer = document.getElementById("g-recaptcha");
 		if($(grecaptchaContainer).length>0){
@@ -159,9 +159,9 @@ function SF_scripts(){
 									if(grecaptchaInput.length>0){
 										grecaptchaInput.val(grecaptchaResponse);
 									}else{
-										form.append('<input name="g-recaptcha-response" value="'+grecaptchaResponse+'" type="hidden" />');						
+										form.append('<input name="g-recaptcha-response" value="'+grecaptchaResponse+'" type="hidden" />');
 									}
-									submitForm(form);					
+									submitForm(form);
 								}else{
 									grecaptcha.reset(grecaptchaWidgetID);
 								}
@@ -174,7 +174,7 @@ function SF_scripts(){
 								$(".alert-form-error").fadeIn(200).delay(10000).fadeOut(200);
 								grecaptcha.reset(grecaptchaWidgetID);
 							},
-						});						
+						});
 					}else{
 						grecaptcha.reset(grecaptchaWidgetID);
 					}
@@ -187,7 +187,7 @@ function SF_scripts(){
 		    var	term = form.serialize(),
 				url = form.attr("action"),
 				required_fields_filled = true;
-				
+
 			form.find("input, textarea, select").each(function(){
 				if($(this).prop("required") && $(this).val()==""){
 					required_fields_filled = false;
@@ -216,13 +216,13 @@ function SF_scripts(){
 			}
 		}
 	});
-	
+
 	// Close gReCaptcha popup
-	
+
 	$(".grecaptcha-overlay").click(function(){
 		hidegRecaptchaPopup();
 	});
-	
+
 	function hidegRecaptchaPopup(){
 		if($(".grecaptcha-popup").is(":visible")){
 			$(".grecaptcha-popup").fadeOut(200, function(){
@@ -271,7 +271,7 @@ function SF_scripts(){
 			});
 		});
 	});
-	
+
 	// Opening tabs
 
 	function openTab(tab){
@@ -331,7 +331,7 @@ function SF_scripts(){
 	if($(".js-cvv-mask").length > 0){
 		$(".js-cvv-mask").mask("999");
 	}
-	
+
 	// Disable / enable blocks in Form 13
 
 	$(".form_13 input[type=radio]").change(function(){
@@ -339,9 +339,9 @@ function SF_scripts(){
 		$(".js-form-block").removeClass("active");
 		choosenBlock.addClass("active");
 	});
-	
+
 	// Ecommerce: Quantity selector
-	
+
 	$(".quantity_selector .control").click(function(event){
 		event.preventDefault();
 		var _this = $(this);
@@ -360,9 +360,9 @@ function SF_scripts(){
 			}
 		}
 	});
-	
+
 	// Ecommerce: Remove products from cart
-	
+
 	$(".remove_product").click(function(event){
 		event.preventDefault();
 		var product = $(this).closest(".product");
@@ -380,9 +380,9 @@ function SF_scripts(){
 			}
 		})
 	});
-	
+
 	// Ecommerce: Set discount
-	
+
 	$(".ecommerce_33 input[name=coupon]").change(function(){
 		if($(this).val()!=""){
 			var discount = $(".ecommerce_33 .discount").attr("data-discount");
@@ -394,9 +394,9 @@ function SF_scripts(){
 			count_totals_ecommerce_33();
 		}
 	});
-	
+
 	// Ecommerce: Count total price
-	
+
 	if($(".ecommerce_33 .product").length>0){
 		$(".ecommerce_33 .quantity_selector input").change(function(){
 			count_totals_ecommerce_33();
@@ -418,7 +418,7 @@ function SF_scripts(){
 		}
 		count_totals_ecommerce_33();
 	}
-	
+
 	if($(".ecommerce_34 .product").length>0){
 		$(".ecommerce_34 .quantity_selector input").change(function(){
 			count_totals_ecommerce_34();
@@ -441,7 +441,7 @@ function SF_scripts(){
 		}
 		count_totals_ecommerce_34();
 	}
-	
+
 	if($(".ecommerce_35 .product").length>0){
 		$(".ecommerce_35 .quantity_selector input").change(function(){
 			count_totals_ecommerce_35();
@@ -459,7 +459,7 @@ function SF_scripts(){
 		}
 		count_totals_ecommerce_35();
 	}
-	
+
 	if($(".ecommerce_36 .product").length>0){
 		$(".ecommerce_36 .quantity_selector input, .ecommerce_36 input[name=coupon]").change(function(){
 			count_totals_ecommerce_36();
@@ -481,7 +481,7 @@ function SF_scripts(){
 		}
 		count_totals_ecommerce_36();
 	}
-	
+
 	if($(".ecommerce_38 .product").length>0){
 		function count_totals_ecommerce_38(){
 			var total = 0;
@@ -504,7 +504,7 @@ function SF_scripts(){
 
 	if($(".js-google-map").length>0){
 		$(".js-google-map").each(function(){
-			
+
 			var map;
 			var map_container = this;
 			if($(map_container).attr("data-coords")!=undefined){
@@ -528,11 +528,11 @@ function SF_scripts(){
 						zoom: zoom,
 						center: coords,				},
 					map = new google.maps.Map(map_container, mapOptions);
-				if(marker_image){	
+				if(marker_image){
 					var marker_icon = {
-						url: marker_image, 
+						url: marker_image,
 						scaledSize: new google.maps.Size(marker_size[0], marker_size[1]),
-						origin: new google.maps.Point(0,0), 
+						origin: new google.maps.Point(0,0),
 						anchor: new google.maps.Point(marker_size[0]/2, marker_size[1])
 					},
 					marker = new google.maps.Marker({
@@ -543,7 +543,7 @@ function SF_scripts(){
 				}
 
 			}
-			
+
 			init();
 
 		});
@@ -552,7 +552,7 @@ function SF_scripts(){
 	/*
 		Sliders
 	*/
-	
+
 	var slick_slider;
 
 	if($(".header_8 .slider").length>0){
@@ -609,7 +609,7 @@ function SF_scripts(){
 			}
 		});
 	}
-	
+
 	if($(".navigation_23 .slider").length>0){
 		$(".navigation_23 .slider").each(function(index){
 			slick_slider = $(this);
@@ -644,7 +644,7 @@ function SF_scripts(){
 			}
 		});
 	}
-	
+
 	if($(".feature_29 .slider").length>0){
 		$(".feature_29 .slider").each(function(index){
 			slick_slider = $(this);
@@ -750,7 +750,7 @@ function SF_scripts(){
 			}
 		});
 	}
-	
+
 	if($(".pricing_table_6 .slider").length>0){
 		$(".pricing_table_6 .slider").each(function(index){
 			slick_slider = $(this);
@@ -778,7 +778,7 @@ function SF_scripts(){
 						togglePin.animate({left:animate_to},200);
 					}
 				});
-				
+
 			}
 			toggle.click(function(){
 				$(".pricing_table_6 .slider:eq("+index+")").slick("slickNext");
@@ -819,7 +819,7 @@ function SF_scripts(){
 			}
 		});
 	}
-	
+
 	if($(".ecommerce_15 .slider").length>0){
 		$(".ecommerce_15 .slider").each(function(index){
 			slick_slider = $(this);
@@ -879,7 +879,7 @@ function SF_scripts(){
 			}
 		});
 	}
-	
+
 	if($(".ecommerce_19 .slider").length>0){
 		$(".ecommerce_19 .slider").each(function(index){
 			slick_slider = $(this);
@@ -925,7 +925,7 @@ function SF_scripts(){
 			}
 		});
 	}
-	
+
 	if($(".ecommerce_32 .slider").length>0){
 		$(".ecommerce_32 .slider").each(function(index){
 			slick_slider = $(this);
@@ -964,7 +964,7 @@ function SF_scripts(){
 			}
 		});
 	}
-	
+
 	if($(".ecommerce_35 .slider").length>0){
 		$(".ecommerce_35 .slider").each(function(index){
 			slick_slider = $(this);

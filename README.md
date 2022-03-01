@@ -1,19 +1,20 @@
 # Flower Classifier 🍃
 
-The current repository hosts Davide Pollicino Honours Project.
-The project (still under implementation), 
-offers research documentation related the implementation of a **Flower Classifier**. 
+#### Status
+[![PIPELINE status](https://github.com/omonimus1/plant_classification/actions/workflows/django.yml/badge.svg)](https://github.com/Potatoapp/backend-and-services-potato/actions/workflows/django.yml)
 
-### CNN detailes
-* The CNN implements has been build using the technologies listed below. 
+The current repository hosts Davide Pollicino Honours Project.
+The project (still under implementation),
+offers research documentation related the implementation of a **Flower Classifier**.
+
+### CNN details
+* The CNN implements has been build using the technologies listed below.
 So far, it is possible to classify the following categories of flowers: Tulip, Sunflower, Rose, dandelion, daisy.
 
 #### Project assets
 * Jupiter Notebook
 * [Web app](webAppClassifier/README.md)
 * [Mobile Application](recognition_app/README.md)
-
-
 #### Technologies
 
 <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white">
@@ -25,4 +26,18 @@ So far, it is possible to classify the following categories of flowers: Tulip, S
 <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white">
 <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
 
--------
+###  Coding style and quality check and dependencies for code checks
+* Coding style: Black
+* Python Lint: Flake8, flake8-todos
+* mypy (for english type checking)
+* trim (to trim files)
+* autopep8 (to automatically reformat a python file in according to pep8 directive)
+* black (For code quality check purposes)
+```
+# format folder
+black folder_name
+# Remote all white spaces from project files
+trim .
+# Format file to improve syntax in according to flake8 (yes -> 2 times --aggressive)
+autopep8 --in-place --aggressive --aggressive filename.py
+```
