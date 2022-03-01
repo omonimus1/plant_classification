@@ -2,9 +2,9 @@ name: PIPELINE Testing
 
 on:
   push:
-    branches: [ develop, master, staging ]
+    branches: [ develop, main, master, staging ]
   pull_request:
-    branches: [ develop, master, staging ]
+    branches: [ develop, main, master, staging ]
 
 jobs:
   build:
