@@ -3,6 +3,7 @@ import json
 from django.http.response import JsonResponse
 from rest_framework.response import Response
 from .models import Prediction
+
 # Prediction Model section
 from .forms import ProfileForm
 
@@ -35,7 +36,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D  # needed to plot 3-D surfaces
 
 # dl libraries specifically for CNN
-from keras.preprocessing.image import ImageDataGenerator,load_img, img_to_array
+from keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from keras import optimizers
@@ -44,8 +45,13 @@ import os
 
 model = Sequential()
 current_directory = os.getcwd()
-model_path = current_directory+'classifier.pkl'
-model = pickle.load(open('/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/classifier.pkl', 'rb'))
+model_path = current_directory + "classifier.pkl"
+model = pickle.load(
+    open(
+        "/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/classifier.pkl",
+        "rb",
+    )
+)
 
 
 class ClassifyFlowerAPI(UpdateAPIView):
@@ -57,17 +63,17 @@ class ClassifyFlowerAPI(UpdateAPIView):
         profile_form = ProfileForm(data=request.POST, files=request.FILES)
         if profile_form.is_valid():
             image = profile_form.instance
-            name = 'GNAGNA'
+            name = "GNAGNA"
             single_prediction = Prediction(name=name, image=image)
             single_prediction.save()
             print(single_prediction.image.url)
             #
-            # profile_form.save()
+            # profile_form.save()
             predict_image(single_prediction.image.url)
 
 
 def predict_image(img_array):
-    print('ciao')
+    print("ciao")
     """
     img_path = picture_url
     print('BEFORE LOAD')
@@ -75,10 +81,10 @@ def predict_image(img_array):
     print('BEFORE IMG TO ARRAY')
     img_array = image.img_to_array(img)
     """
-    print('BEFORE EXPAND DIMS')
+    print("BEFORE EXPAND DIMS")
     img_batch = np.expand_dims(img_array, axis=0)
-    print('BEFORE PREDICT')
+    print("BEFORE PREDICT")
     prediction = model.predict(img_batch)
-    print('BEFORE ARGMAX')
-    pred_digits=np.argmax(prediction,axis=1)
+    print("BEFORE ARGMAX")
+    pred_digits = np.argmax(prediction, axis=1)
     print(pred_digits)

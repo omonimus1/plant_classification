@@ -6,19 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('classifier', '0004_auto_20220223_1333'),
+        ("classifier", "0004_auto_20220223_1333"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Image',
+            name="Image",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200)),
-                ('image', models.ImageField(upload_to='users/%Y/%m/%d/')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200)),
+                ("image", models.ImageField(upload_to="users/%Y/%m/%d/")),
             ],
         ),
         migrations.DeleteModel(
-            name='Student',
+            name="Student",
         ),
     ]
