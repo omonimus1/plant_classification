@@ -15,17 +15,16 @@
                 <div id="form" id="classifier">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ profile_form.as_p }}
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <input type="file" name="imageFile" />
+                        <input type="submit" name="submit" value="Upload" />
                     </form>
                 </div>
             </div>
 
             <div class="col-6">
                 <span class='logo'>Image Uploaded</span> </br>
-                {% if img_obj %}
-                    <p>{{ img_obj.name }} </p>
-                    <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:100px; max-width:100px;">
+                {% if predictions %}
+                    <p> {{predictions}} </p>
                 {% endif %}
             </div>
         </div>
