@@ -2,6 +2,8 @@
 
 #### Status
 [![PIPELINE status](https://github.com/omonimus1/plant_classification/actions/workflows/django.yml/badge.svg)](https://github.com/Potatoapp/backend-and-services-potato/actions/workflows/django.yml)
+[![codecov](https://codecov.io/gh/omonimus1/plant_classification/branch/main/graph/badge.svg?token=MXVI6OEXK9)](https://codecov.io/gh/omonimus1/plant_classification)
+
 
 The current repository hosts Davide Pollicino Honours Project.
 The project (still under implementation),
