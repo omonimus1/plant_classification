@@ -11,6 +11,7 @@ __pycache__/
 *.pyd
 __pycache__
 .pytest_cache
+.pytest_cache/
 .idea
 
 # Distribution / packaging
@@ -109,15 +110,12 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
-
-media/
 
 # Spyder project settings
 .spyderproject
@@ -141,8 +139,15 @@ dmypy.json
 # Others for repository management
 .DS_Store
 .vs
+.vscode
 
 # PyCharm configuration
 .idea/
+idea/
 workspace.xml
 vsc.xml
+
+.env
+__pycache__/
+__pycache__
+classifier/__pycache__

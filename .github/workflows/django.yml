@@ -32,4 +32,4 @@ jobs:
     - name: Run Tests and Upload coverage testing
       run: |
         python3 manage.py test
-        codecov -t e1391092-764f-4123-ad04-e05e307a6268
+        codecov -t 23e7f1fe-6679-4642-8ed3-e46f4478f240
