@@ -1,7 +1,6 @@
-from .views import *
-from django.conf import settings
-from django.urls import path, include
-from django.conf.urls.static import static
+
+from .views import Index, ImageView, Display
+from django.urls import path
 
 urlpatterns = [
     path('', Index, name='index'),

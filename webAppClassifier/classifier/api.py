@@ -1,16 +1,3 @@
-from re import template
-from django.shortcuts import render
-from django.views.generic import DetailView
-from .forms import ProfileForm
-from .models import Prediction
-from .api import  ClassifyFlowerAPI, predict_image
-from django.core.files.storage import default_storage
-
-# Create your views here.
-def Index(request):
-    return render(request, 'index.html')
-
-
 from rest_framework.generics import UpdateAPIView
 import json
 from django.http.response import JsonResponse
@@ -50,39 +37,48 @@ from mpl_toolkits.mplot3d import Axes3D  # needed to plot 3-D surfaces
 # dl libraries specifically for CNN
 from keras.preprocessing.image import ImageDataGenerator,load_img, img_to_array
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from keras import optimizers
 import os
-import requests
 
-
-
-from . import predictor
 
 model = Sequential()
 current_directory = os.getcwd()
 model_path = current_directory+'classifier.pkl'
 model = pickle.load(open('/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/classifier.pkl', 'rb'))
 
-def ImageView(request):
-    if request.method == 'POST':
-        file = request.FILES["imageFile"]
-        file_name = default_storage.save(file.name, file)
-        
-        Prediction.objects.create(name=file_name, image=file)
-        
-        file_url = default_storage.path(file_name)
-        img = image.load_img(file_url, target_size=(150, 150))
-        img_array = image.img_to_array(img)
-        img_batch = np.expand_dims(img_array, axis=0)
-        prediction = model.predict(img_batch)
-        pred_digits=np.argmax(prediction,axis=1)
-        print(pred_digits)
-        return render(request, "upload.html", {"predictions": predictor.flower_identification[pred_digits[0]], "image": file_url})
-    else:
-        return render(request, 'upload.html')
+
+class ClassifyFlowerAPI(UpdateAPIView):
+    queryset = Prediction.objects.all()
+    # serializer_class = UserSerializer
+    # permission_classes = [IsActive, IsAuthenticated,]
+
+    def post(self, request):
+        profile_form = ProfileForm(data=request.POST, files=request.FILES)
+        if profile_form.is_valid():
+            image = profile_form.instance
+            name = 'GNAGNA'
+            single_prediction = Prediction(name=name, image=image)
+            single_prediction.save()
+            print(single_prediction.image.url)
+            # 
+            # profile_form.save()
+            predict_image(single_prediction.image.url)
 
 
-def Display(request):
-    if request.method == 'GET':
-        img = Prediction.objects.all()
-        return render(request, 'display.html', {'profile_img': img})
+def predict_image(img_array):
+    print('ciao')
+    """
+    img_path = picture_url
+    print('BEFORE LOAD')
+    img = image.load_img(img_path, target_size=(150, 150))
+    print('BEFORE IMG TO ARRAY')
+    img_array = image.img_to_array(img)
+    """
+    print('BEFORE EXPAND DIMS')
+    img_batch = np.expand_dims(img_array, axis=0)
+    print('BEFORE PREDICT')
+    prediction = model.predict(img_batch)
+    print('BEFORE ARGMAX')
+    pred_digits=np.argmax(prediction,axis=1)
+    print(pred_digits)
