@@ -1,10 +1,13 @@
 # Flower Classifier 🍃
 
+#### Status
+[![PIPELINE status](https://github.com/omonimus1/plant_classification/actions/workflows/django.yml/badge.svg)](https://github.com/Potatoapp/backend-and-services-potato/actions/workflows/django.yml)
+
 The current repository hosts Davide Pollicino Honours Project.
 The project (still under implementation),
 offers research documentation related the implementation of a **Flower Classifier**.
 
-### CNN detailes
+### CNN details
 * The CNN implements has been build using the technologies listed below.
 So far, it is possible to classify the following categories of flowers: Tulip, Sunflower, Rose, dandelion, daisy.
 
