@@ -52,12 +52,16 @@ from keras.preprocessing.image import ImageDataGenerator,load_img, img_to_array
 from tensorflow.keras.models import Sequential
 from keras import optimizers
 import os
+import requests
+
+
+
+from . import predictor
 
 model = Sequential()
 current_directory = os.getcwd()
 model_path = current_directory+'classifier.pkl'
 model = pickle.load(open('/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/classifier.pkl', 'rb'))
-import requests
 
 def ImageView(request):
     if request.method == 'POST':
@@ -70,7 +74,7 @@ def ImageView(request):
         prediction = model.predict(img_batch)
         pred_digits=np.argmax(prediction,axis=1)
         print(pred_digits)
-        return render(request, "upload.html", {"predictions": pred_digits})
+        return render(request, "upload.html", {"predictions": predictor.flower_identification[pred_digits[0]]})
     else:
         return render(request, 'upload.html')
 
