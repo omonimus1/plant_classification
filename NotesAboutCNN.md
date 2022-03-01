@@ -2,7 +2,7 @@
 
 * CNN
 * Difference between CNN and ConvNet
-* State-of-art accuracy: 
+* State-of-art accuracy:
 * Popular networks / model : Vgg16, Vgg19, ResNet50, GoogleNet, Resnet, DenseNet;
 
 * [Theory introduction Preparation](https://puneetkhanna777.medium.com/image-classification-using-convolutional-neural-network-89e751416cc3)
@@ -19,4 +19,3 @@ Pooling merely means down sampling of an image. It takes small region of the con
 * Fully Connected Layer:
 
 * Fully connected (FC) layers are always used as the last layers of a CNN. This layer takes input from all neurons in the previous layer and performs arithmetic sum of the preceding layer of features with individual neuron in the current layer to generate output
-

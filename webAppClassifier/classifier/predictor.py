@@ -3,5 +3,5 @@ flower_identification = {
     1: 'Tulip',
     2: 'Rose',
     3: 'Daisy',
-    4: 'Sunflower' 
+    4: 'Sunflower'
 }

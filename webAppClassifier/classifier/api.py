@@ -19,8 +19,8 @@ from os.path import isfile, join, abspath, exists, isdir, expanduser
 from os import listdir, makedirs, getcwd, remove
 from pathlib import Path
 
-# Data visualisation 
-import pandas as pd 
+# Data visualisation
+import pandas as pd
 
 # Image manipulation
 from PIL import Image
@@ -29,7 +29,7 @@ import cv2
 # Specifically for manipulating zipped images and getting numpy arrays of pixel values of images.
 import matplotlib.pyplot as plt
 import matplotlib.image as mimg
-import numpy as np 
+import numpy as np
 
 # Plotting library
 from mpl_toolkits.mplot3d import Axes3D  # needed to plot 3-D surfaces
@@ -61,7 +61,7 @@ class ClassifyFlowerAPI(UpdateAPIView):
             single_prediction = Prediction(name=name, image=image)
             single_prediction.save()
             print(single_prediction.image.url)
-            # 
+            #
             # profile_form.save()
             predict_image(single_prediction.image.url)
 

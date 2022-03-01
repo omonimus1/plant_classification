@@ -32,8 +32,8 @@ from os.path import isfile, join, abspath, exists, isdir, expanduser
 from os import listdir, makedirs, getcwd, remove
 from pathlib import Path
 
-# Data visualisation 
-import pandas as pd 
+# Data visualisation
+import pandas as pd
 
 # Image manipulation
 from PIL import Image
@@ -42,7 +42,7 @@ import cv2
 # Specifically for manipulating zipped images and getting numpy arrays of pixel values of images.
 import matplotlib.pyplot as plt
 import matplotlib.image as mimg
-import numpy as np 
+import numpy as np
 
 # Plotting library
 from mpl_toolkits.mplot3d import Axes3D  # needed to plot 3-D surfaces
@@ -67,9 +67,9 @@ def ImageView(request):
     if request.method == 'POST':
         file = request.FILES["imageFile"]
         file_name = default_storage.save(file.name, file)
-        
+
         Prediction.objects.create(name=file_name, image=file)
-        
+
         file_url = default_storage.path(file_name)
         img = image.load_img(file_url, target_size=(150, 150))
         img_array = image.img_to_array(img)
