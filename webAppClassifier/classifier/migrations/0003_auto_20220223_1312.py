@@ -6,22 +6,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('classifier', '0002_auto_20220223_1238'),
+        ("classifier", "0002_auto_20220223_1238"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Movies',
+            name="Movies",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file', models.FileField(upload_to='documents/')),
-                ('image', models.ImageField(upload_to='images/')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("file", models.FileField(upload_to="documents/")),
+                ("image", models.ImageField(upload_to="images/")),
             ],
         ),
         migrations.DeleteModel(
-            name='Classification',
+            name="Classification",
         ),
         migrations.DeleteModel(
-            name='Image',
+            name="Image",
         ),
     ]

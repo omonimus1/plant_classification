@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('classifier', '0001_initial'),
+        ("classifier", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='image',
-            name='image',
-            field=models.ImageField(blank=True, upload_to='users/%Y/%m/%d/'),
+            model_name="image",
+            name="image",
+            field=models.ImageField(blank=True, upload_to="users/%Y/%m/%d/"),
         ),
         migrations.AlterModelTable(
-            name='image',
+            name="image",
             table=None,
         ),
     ]
