@@ -1,7 +1,7 @@
 # Flower Classifier 🍃
 
 #### Status
-[![PIPELINE status](https://github.com/omonimus1/plant_classification/actions/workflows/django.yml/badge.svg)](https://github.com/Potatoapp/backend-and-services-potato/actions/workflows/django.yml)
+[![PIPELINE Testing](https://github.com/omonimus1/plant_classification/actions/workflows/django.yml/badge.svg?branch=develop)](https://github.com/omonimus1/plant_classification/actions/workflows/django.yml)
 [![codecov develop](https://codecov.io/gh/omonimus1/plant_classification/branch/develop/graph/badge.svg?token=MXVI6OEXK9)](https://codecov.io/gh/omonimus1/plant_classification)
 
 
