@@ -24,7 +24,7 @@ model = pickle.load(
 
 
 # Create your views here.
-def Index(request):
+def IndexView(request):
     return render(request, "index.html")
 
 

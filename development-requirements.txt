@@ -2,10 +2,7 @@ Django
 numpy
 whitenoise
 tensorflow
-matplotlib
-opencv-python
 pandas
-pillow
 django_rest_framework
 keras
 flake8
@@ -15,6 +12,5 @@ autopep8
 black # For code quality check purposes
 mypy # for english type checking
 django-environ
-dj-database-url
 gunicorn
-whitenoise
+Pillow
