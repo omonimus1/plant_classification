@@ -1,19 +1,23 @@
-import pickle
 import os
-import numpy as np
-from .models import Prediction
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.models import Sequential
-from django.shortcuts import render
-from django.core.files.storage import default_storage
-from . import predictor
+import pickle
 
+import numpy as np
+from django.core.files.storage import default_storage
+from django.shortcuts import render
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.preprocessing import image
+
+from . import predictor
+from .models import Prediction
+
+module_dir = os.path.dirname(__file__)  # get current directory
+module_path = os.path.join(module_dir, 'classifier.pkl')
 model = Sequential()
 current_directory = os.getcwd()
 model_path = current_directory + "classifier.pkl"
 model = pickle.load(
     open(
-        "/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/classifier.pkl",
+        module_path,
         "rb",
     )
 )
