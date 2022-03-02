@@ -28,6 +28,9 @@ jobs:
     - name: Check Code Quality
       run: |
         flake8
+    -name : Crete venv file
+      working-directory: ./webAppClassifier/webAppClassifier
+      run: cp .env.example .env
     - uses: codecov/codecov-action@v2
     - name: Run Tests and Upload coverage testing
       working-directory: ./webAppClassifier
