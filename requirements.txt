@@ -7,3 +7,4 @@ django_rest_framework
 keras
 django-environ
 gunicorn
+Pillow
