@@ -1,12 +1,11 @@
 from django.test import TestCase
-
+from django.contrib.auth.models import AnonymousUser
+from django.http import Http404
+from django.test import RequestFactory
+from django.urls import resolve
+from django.urls.exceptions import Resolver404
 from .models import UserContactRequest
-
-
-class PredictionModelTest(TestCase):
-    def test(self):
-        self.assertEquals(200, 200)
-
+from .views import IndexView, ImageView
 
 class UserContactTest(TestCase):
     @classmethod
@@ -17,21 +16,20 @@ class UserContactTest(TestCase):
         userRequest = UserContactRequest.objects.get(pk=1)
         self.assertEquals(userRequest.name, 'Davide')
 
+class ImageViewTestCase(TestCase):
+    longMessage = True
+    def test_get(self):
+        
+        req = RequestFactory().get('upload')
+        req.user = AnonymousUser()
+        resp = ImageView(req, *[], **{})
+        self.assertEqual(resp.status_code, 200)
 
-"""
-class PredictionModelTest(TestCase):
-    @classmethod
-    def setUp(cls):
-        current_directory = os.getcwd()
-        image_path = current_directory + "testImages/sunflower.jpeg"
-
-        newPhoto = SimpleUploadedFile(name='test_image.jpg', content=open(image_path, 'rb').read(),
-                                            content_type='image/jpeg')
-        Prediction.objects.create(name='Python', image=newPhoto.image)
-
-        def test_name_max_length(self):
-            unit = Prediction.objects.get(id=1)
-            max_length = unit._meta.get_field('name').max_length
-            self.assertEquals(max_length, 200)
-
-"""
+class IndexViewTestCase(TestCase):
+    longMessage = True
+    def test_get(self):
+        
+        req = RequestFactory().get('')
+        req.user = AnonymousUser()
+        resp = IndexView(req, *[], **{})
+        self.assertEqual(resp.status_code, 200)
