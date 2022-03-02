@@ -2,9 +2,9 @@ name: PIPELINE Testing
 
 on:
   push:
-    branches: [ develop, master, staging ]
+    branches: [ develop, main, master, staging ]
   pull_request:
-    branches: [ develop, master, staging ]
+    branches: [ develop, main, master, staging ]
 
 jobs:
   build:
@@ -20,16 +20,18 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-      
+
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
     - name: Check Code Quality
-      run: |
-        flake8
+      run: flake8
+
     - uses: codecov/codecov-action@v2
     - name: Run Tests and Upload coverage testing
+      working-directory: ./webAppClassifier
       run: |
         python3 manage.py test
-        codecov -t 23e7f1fe-6679-4642-8ed3-e46f4478f240
+        pip install codecov && codecov -t 23e7f1fe-6679-4642-8ed3-e46f4478f240
