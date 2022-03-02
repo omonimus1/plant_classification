@@ -15,3 +15,6 @@ autopep8
 black # For code quality check purposes
 mypy # for english type checking
 django-environ
+dj-database-url
+gunicorn
+whitenoise
