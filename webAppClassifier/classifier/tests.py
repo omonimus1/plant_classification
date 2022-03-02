@@ -1,11 +1,9 @@
 from django.test import TestCase
 from django.contrib.auth.models import AnonymousUser
-from django.http import Http404
 from django.test import RequestFactory
-from django.urls import resolve
-from django.urls.exceptions import Resolver404
 from .models import UserContactRequest
 from .views import IndexView, ImageView
+
 
 class UserContactTest(TestCase):
     @classmethod
@@ -16,19 +14,21 @@ class UserContactTest(TestCase):
         userRequest = UserContactRequest.objects.get(pk=1)
         self.assertEquals(userRequest.name, 'Davide')
 
+
 class ImageViewTestCase(TestCase):
     longMessage = True
+
     def test_get(self):
-        
         req = RequestFactory().get('upload')
         req.user = AnonymousUser()
         resp = ImageView(req, *[], **{})
         self.assertEqual(resp.status_code, 200)
 
+
 class IndexViewTestCase(TestCase):
     longMessage = True
+
     def test_get(self):
-        
         req = RequestFactory().get('')
         req.user = AnonymousUser()
         resp = IndexView(req, *[], **{})
