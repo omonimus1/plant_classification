@@ -20,17 +20,15 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-      
+
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
     - name: Check Code Quality
-      run: |
-        flake8
-    -name : Crete venv file
-      working-directory: ./webAppClassifier/webAppClassifier
-      run: cp .env.example .env
+      run: flake8
+
     - uses: codecov/codecov-action@v2
     - name: Run Tests and Upload coverage testing
       working-directory: ./webAppClassifier
