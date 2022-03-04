@@ -11,9 +11,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from . import predictor
 from .models import Prediction
-from . serializers import PredictionSerializer
+from .serializers import PredictionSerializer
+
 module_dir = os.path.dirname(__file__)  # get current directory
-module_path = os.path.join(module_dir, 'classifier.pkl')
+module_path = os.path.join(module_dir, "classifier.pkl")
 model = Sequential()
 current_directory = os.getcwd()
 model_path = current_directory + "classifier.pkl"
@@ -67,14 +68,12 @@ def Display(request):
 class GetPredictionApi(APIView):
     serializer_class = PredictionSerializer
     queryset = Prediction.objects.all()
+
     def post(self, request):
-        
+
         image = request.FILES["imageFile"]
         name = default_storage.save(image.name, image)
-        data = {
-            'name' : name,
-            'image' : image
-        }
+        data = {"name": name, "image": image}
         serializer = PredictionSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -88,9 +87,14 @@ class GetPredictionApi(APIView):
             pred_digits = np.argmax(prediction, axis=1)
             print(pred_digits)
             response = {
-                'image': file_url, 
-                'predictions': predictor.flower_identification[pred_digits[0]]
+                "image": file_url,
+                "predictions": predictor.flower_identification[pred_digits[0]],
             }
-            return Response({"status": "success", "data": response}, status=status.HTTP_200_OK)
+            return Response(
+                {"status": "success", "data": response}, status=status.HTTP_200_OK
+            )
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"status": "error", "data": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
