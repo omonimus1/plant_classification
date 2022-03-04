@@ -10,8 +10,8 @@ class Prediction(models.Model):
         return self.name
 
 class Result(models.Model):
-    imagine = models.ForeignKey(Prediction)
-    result = models.CharField(
+    imagine = models.ForeignKey(Prediction, on_delete=models.CASCADE)
+    expected_result = models.CharField(
         max_length=100, blank=True, null=False, default=""
     )
     prediction_feedback = models.BooleanField(blank=True, null=False, default=False)

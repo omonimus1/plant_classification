@@ -6,7 +6,7 @@ from django.core.files.storage import default_storage
 from django.shortcuts import render
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing import image
-from rest_framework.views import APIView, ModelViewSet
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import predictor
@@ -62,7 +62,7 @@ def Display(request):
         return render(request, "display.html", {"profile_img": img})
 
 
-class GetPredictionApi(ModelViewSet):
+class GetPredictionApi(APIView):
     serializer_class = PredictionSerializer
     queryset = Prediction.objects.all()
     def post(self, request):
