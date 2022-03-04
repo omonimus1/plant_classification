@@ -3,9 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import predictor
-from .models import Prediction
-from .serializers import PredictionSerializer
+from .models import Prediction, Result
+from .serializers import PredictionSerializer, PredictionSerializer
 from django.core.files.storage import default_storage
+from rest_framework.generics import GenericAPIView
 
 class GetPredictionApi(APIView):
     serializer_class = PredictionSerializer
@@ -34,6 +35,24 @@ class GetPredictionApi(APIView):
             }
             return Response(
                 {"status": "success", "data": response}, status=status.HTTP_200_OK
+            )
+        else:
+            return Response(
+                {"status": "error", "data": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+    
+
+class PredictionFeedbackApi(GenericAPIView):
+    serializer_class = PredictionSerializer
+    queryset = Result.objects.all()
+
+    def post(self, request):
+        serializer = PredictionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"status": "success"}, status=status.HTTP_200_OK
             )
         else:
             return Response(
