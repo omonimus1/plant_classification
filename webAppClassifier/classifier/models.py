@@ -4,13 +4,13 @@ from django.db import models
 class Prediction(models.Model):
     name = models.CharField(max_length=200, blank=True)
     image = models.ImageField(upload_to="img/%Y/%m/%d/", blank=False)
-
+    predicted = models.CharField(max_length=200, blank=True, null=True, default='')
 
     def __str__(self):
         return self.name
 
 class Result(models.Model):
-    imagine = models.ForeignKey(Prediction, on_delete=models.CASCADE)
+    image = models.ForeignKey(Prediction, on_delete=models.CASCADE)
     expected_result = models.CharField(
         max_length=100, blank=True, null=False, default=""
     )
