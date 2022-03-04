@@ -53,6 +53,7 @@ def ImageView(request):
             {
                 "predictions": prediction,
                 "image": file_url,
+                "id": prediction_request.pk
             },
         )
     else:
@@ -61,9 +62,11 @@ def ImageView(request):
 
 def Display(request):
     if request.method == "GET":
-        img = Prediction.objects.all()
-        return render(request, "display.html", {"profile_img": img})
+        return render(request, "display.html")
 
+
+def thanks(request):
+    return render(request, "thank-you.html")
 
 class GetPredictionApi(APIView):
     serializer_class = PredictionSerializer
