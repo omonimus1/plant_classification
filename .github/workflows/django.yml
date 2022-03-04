@@ -28,7 +28,7 @@ jobs:
       - name: Format code in according to blake
         run: |
           black webAppClassifier
-          black Classifier
+          black classifier
       - name: Trim files
         run: |
           pip3 install trim
