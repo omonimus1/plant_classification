@@ -6,6 +6,7 @@
 		<meta charset="utf-8" >
 		<title>Plant Classifier</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="{% static 'i/flower.jpeg' %}" type="image/x-icon">
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Rubik:100,200,300,400,600,500,700,800,900|Karla:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 		<!-- Bootstrap 4.3.1 CSS -->
@@ -24,34 +25,9 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	</head>
+	<body>
+<!-- Navigation Mobile type 1 -->
 
-    <a href="#" class="open_menu bg-light radius_full"><i class="fas fa-bars lh-40"></i></a>
-<div class="navigation_mobile bg-dark type1">
-	<a href="#" class="close_menu color-white"><i class="fas fa-times"></i></a>
-	<div class="px-40 pt-60 pb-60 inner">
-		<div class="logo color-white mb-30">Startup</div>
-		<div><a href="#" class="f-heading f-22 link color-white mb-20">Home</a></div>
-		<div><a href="#" class="f-heading f-22 link color-white mb-20">Tour</a></div>
-		<div><a href="#" class="f-heading f-22 link color-white mb-20">Mobile Apps</a></div>
-		<div><a href="#" class="f-heading f-22 link color-white mb-20">Pricing</a></div>
-		<div><a href="#" class="f-heading f-22 link color-white mb-20">Development</a></div>
-		<div><a href="#" class="link color-white op-3 mb-15">Help</a></div>
-		<div><a href="#" class="link color-white op-3 mb-15">F.A.Q.</a></div>
-		<div><a href="#" class="link color-white op-3 mb-15">Support</a></div>
-		<div><a href="#" class="link color-white op-3 mb-15">About Us</a></div>
-		<div><a href="#" class="link color-white op-3 mb-15">Blog</a></div>
-		<div><a href="#" class="link color-white op-3 mb-15">Careers</a></div>
-
-		<div class="socials mt-40">
-			<a href="#" target="_blank" class="link color-white f-18 mr-20"><i class="fab fa-twitter"></i></a>
-			<a href="#" target="_blank" class="link color-white f-18 mr-20"><i class="fab fa-facebook"></i></a>
-			<a href="#" target="_blank" class="link color-white f-18 mr-20"><i class="fab fa-google-plus-g"></i></a>
-		</div>
-
-		<div class="mt-50 f-14 light color-white op-3 copy">&copy; 2020 Designmodo. All rights reserved.</div>
-	</div>
-</div>		<!-- Header 1 -->
-		<header class="pt-50 pb-10 bg-light header_1">
 			<nav class="header_menu_1 pt-30 pb-30 mt-30">
 				<div class="container px-xl-0 text-black">
 					<div class="row justify-content-center align-items-center f-18 medium">
@@ -59,12 +35,8 @@
 							<span>Plant Classifier</span>
 						</div>
 						<div class="col-lg-6 text-center">
-							<a href="#" class="link color-heading mx-15">Overview</a>
-							<a href="#" class="link color-heading mx-15">Features</a>
-							<a href="#contact" class="link color-heading mx-15">Contact</a>
-							<a href="#" class="link color-heading f-16 mx-15">
-								<i class="fas fa-search"></i>
-							</a>
+							<a href="/#about" class="link color-heading mx-15">Overview</a>
+							<a href="/#contact" class="link color-heading mx-15">Contact</a>
 						</div>
 						<div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-end align-items-center">
 							<a href="upload" class="btn sm action-1">Recognize flower</a>
@@ -74,49 +46,28 @@
 			</nav>
 			<div class="container">
 			</div>
-		</header>
-	<body>
+
 
         {% block content %}
         {% endblock %}
 
-		<!-- Footer 11 -->
-		<footer class="pt-35 pb-45 bg-dark color-white text-center footer_11">
-			<div class="container px-xl-0">
-				<div class="row align-items-center">
-					<div class="mb-20 mb-lg-0 col-lg-3">
-						<a href="#" class="link logo color-white">Plant Classifier</a>
-					</div>
-					<div class="col-lg-9 text-lg-right">
-						<a href="#" class="link color-white mr-10">Privacy Policy</a>
-						<div class="d-inline-block socials">
-							<a href="#" class="link color-white mx-10">
-								<i class="fab fa-twitter"></i>
-							</a>
-							<a href="#" class="link color-white mx-10">
-								<i class="fab fa-facebook-f"></i>
-							</a>
-							<a href="#" class="link color-white ml-10">
-								<i class="fab fa-google-plus-g"></i>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div class="mt-15 mb-15 hr h-2 bg-white op-3">
-					</div>
-				</div>
-				<div class="row">
-					<div class="mb-20 mb-lg-0 col-lg-4">
-						<a href="#overview" class="link color-white mr-10">Overview</a>
-						<a href="#" class="link color-white mx-10">Features</a>
-						<a href="#" class="link color-white mx-10">About Us</a>
-						<a href="#contact" class="link color-white ml-10">Contacts</a>
-					</div>
-					<div class="col-lg-8 text-lg-right">
-						<div class="text-adaptive">© 2022 plant-Classifier, realized by <a href="https://www.linkedin.com/in/davidepollicino7/" target="_blank" style="color: white;">Davide Polllicino</a>. All rights reserved.
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	</body>
+
+	<!-- Bootstrap 4.3.1 JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+	<!-- Fancybox 3 jQuery plugin JS (Open images and video in popup) -->
+	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	<!-- Google maps JS API -->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDP6Ex5S03nvKZJZSvGXsEAi3X_tFkua4U"></script>
+	<!-- Slick 1.8.1 jQuery plugin JS (Sliders) -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<!-- AOS 2.3.4 jQuery plugin JS (Animations) -->
+	<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+	<!-- Maskedinput jQuery plugin JS (Masks for input fields) -->
+	<script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+	<!-- Startup 3 JS (Custom js for all blocks) -->
+	<script src="{% static 'js/script.js'%}"></script>
+</body>
+</html>

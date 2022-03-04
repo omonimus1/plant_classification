@@ -26,11 +26,52 @@
                 {% if predictions %}
                     <img src="{{file.url}}" alt="{{file.name}}" style="max-height:100px; max-width:100px;">
                     <p> {{predictions}} </p>
+
+
+                      <!-- Button to Open the Modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Was the prediction correct?
+                    </button>
+
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Was the prediction correct?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form>
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Expected result</label>
+                                    <input type="text" class="form-control" id="expected" name="expected">
+                                  </div>
+                                </form>
+                              </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yes, it was correct</button>
+                                <button type="button" class="btn btn-primary">Send Expected Prediction</button>
+                            </div>
+
+                        </div>
+                        </div>  <!-- Button to Open the Modal -->
+
                 {% endif %}
             </div>
         </div>
 
     </section>
+    <script>
+        $('#modal').modal('show');
+
+    </script>
 
     </body>
     {% endblock content %}

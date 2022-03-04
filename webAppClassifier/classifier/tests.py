@@ -8,18 +8,20 @@ from .views import IndexView, ImageView
 class UserContactTest(TestCase):
     @classmethod
     def setUp(self):
-        UserContactRequest.objects.create(name='Davide', message='Hi, is prediction working?')
+        UserContactRequest.objects.create(
+            name="Davide", message="Hi, is prediction working?"
+        )
 
     def testSupportUserName(self):
         userRequest = UserContactRequest.objects.get(pk=1)
-        self.assertEquals(userRequest.name, 'Davide')
+        self.assertEquals(userRequest.name, "Davide")
 
 
 class ImageViewTestCase(TestCase):
     longMessage = True
 
     def test_get(self):
-        req = RequestFactory().get('upload')
+        req = RequestFactory().get("upload")
         req.user = AnonymousUser()
         resp = ImageView(req, *[], **{})
         self.assertEqual(resp.status_code, 200)
@@ -29,7 +31,7 @@ class IndexViewTestCase(TestCase):
     longMessage = True
 
     def test_get(self):
-        req = RequestFactory().get('')
+        req = RequestFactory().get("")
         req.user = AnonymousUser()
         resp = IndexView(req, *[], **{})
         self.assertEqual(resp.status_code, 200)

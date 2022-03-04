@@ -6,19 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('classifier', '0010_prediction_name'),
+        ("classifier", "0010_prediction_name"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UserContactRequires',
+            name="UserContactRequires",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=200)),
-                ('surname', models.CharField(blank=True, max_length=200)),
-                ('message', models.TextField(default='No message content given')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=200)),
+                ("surname", models.CharField(blank=True, max_length=200)),
+                ("message", models.TextField(default="No message content given")),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
         ),
     ]
