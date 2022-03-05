@@ -31,7 +31,11 @@ import shutil
 from os.path import isfile, join, abspath, exists, isdir, expanduser
 from os import listdir, makedirs, getcwd, remove
 from pathlib import Path
+import requests
 
+
+
+from . import predictor
 # Data visualisation 
 import pandas as pd 
 
@@ -70,9 +74,8 @@ def ImageView(request):
         prediction = model.predict(img_batch)
         pred_digits=np.argmax(prediction,axis=1)
         print(pred_digits)
-        return render(request, "upload.html", {"predictions": pred_digits})
-    else:
-        return render(request, 'upload.html')
+        return render(request, "upload.html", {"predictions": predictor.flower_identification[pred_digits[0]]})    
+    return render(request, 'upload.html')
 
 
 def Display(request):
