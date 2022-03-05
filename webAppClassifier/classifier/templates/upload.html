@@ -15,7 +15,7 @@
                 <div id="form" id="classifier">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="file" name="imageFile" />
+                        <input type="file" name="image" />
                         <input type="submit" name="submit" value="Upload" />
                     </form>
                 </div>
@@ -57,7 +57,7 @@
                             <!-- Modal footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Yes, it was correct</button>
-                                <button type="button" class="btn btn-primary">Send Expected Prediction</button>
+                                <button type="button" id="send-feedback" onclick="UploadFeedback()" class="btn btn-primary">Send Expected Prediction</button>
                             </div>
 
                         </div>
@@ -68,9 +68,32 @@
         </div>
 
     </section>
+    {% csrf_token %}
     <script>
-        $('#modal').modal('show');
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    </script>
 
+    <script>
+        function UploadFeedback() {
+          $.ajax({
+            url: "http://127.0.0.1:8000/prediction-feedback",
+            type: "POST",
+            headers: {'X-CSRFToken': csrftoken},
+            mode: 'same-origin', // Do not send CSRF token to another domain.
+            data: {
+                "expected_result": "Test AJAX",
+                "image": 80
+            },
+
+            success: function(result) {
+              alert('OK');
+            },
+            error: function(error) {
+              alert('ERRORE');
+              console.log(error);
+            }
+          });
+        }
     </script>
 
     </body>

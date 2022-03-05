@@ -145,32 +145,4 @@
 			</div>
 		</section>
 
-		{% csrf_token %}
-		<script>
-		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-		</script>
-
-		<script>
-			$(document).ready(function() {
-			  $.ajax({
-				url: "http://127.0.0.1:8000/prediction-feedback",
-				type: "POST",
-				headers: {'X-CSRFToken': csrftoken},
-				mode: 'same-origin', // Do not send CSRF token to another domain.
-				data: {
-					"expected_result": "Test AJAX",
-					"image": 80
-				},
-
-				success: function(result) {
-				  alert('OK');
-				},
-				error: function(error) {
-				  alert('ERRORE');
-				  console.log(error);
-				}
-			  });
-			});
-		</script>
-
 {% endblock %}

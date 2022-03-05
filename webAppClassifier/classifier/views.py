@@ -7,6 +7,8 @@ from django.shortcuts import render
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing import image
 from .models import Prediction
+from django.http import HttpRequest
+from rest_framework.request import Request
 
 
 module_dir = os.path.dirname(__file__)  # get current directory
@@ -29,27 +31,24 @@ def IndexView(request):
 
 def ImageView(request):
     if request.method == "POST":
-        file = request.FILES["imageFile"]
+        print(request)
+        file = request.FILES.get["image"]
         file_name = default_storage.save(file.name, file)
 
-        prediction_request = Prediction.objects.create(name=file_name, image=file)
-        prediction_request.save()
+        # Prediction.objects.create(name=file_name, image=file)
         file_url = default_storage.path(file_name)
         img = image.load_img(file_url, target_size=(150, 150))
         img_array = image.img_to_array(img)
         img_batch = np.expand_dims(img_array, axis=0)
         prediction = model.predict(img_batch)
         pred_digits = np.argmax(prediction, axis=1)
-        prediction = predictor.flower_identification[pred_digits[0]]
-        Prediction.objects.filter(pk=prediction_request.pk).update(predicted=prediction)
         print(pred_digits)
         return render(
             request,
             "upload.html",
             {
-                "predictions": prediction,
+                "predictions": predictor.flower_identification[pred_digits[0]],
                 "image": file_url,
-                "id": prediction_request.pk
             },
         )
     else:

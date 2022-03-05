@@ -3,11 +3,11 @@ from .models import Prediction, Result
 from django.db import models
 
 
-class PredictionSerializer(serializers.ModelSerializer):
+class GetPredictionSerializer(serializers.ModelSerializer):
     image = models.ImageField(upload_to="img/%Y/%m/%d/", blank=False)
     class Meta:
         model = Prediction
-        fields = "image"
+        fields = ['image']
 
 
 class PredictionSerializer(serializers.ModelSerializer):
@@ -15,7 +15,6 @@ class PredictionSerializer(serializers.ModelSerializer):
     expected_result = models.CharField(
         max_length=100, blank=True, null=False, default=""
     )
-    prediction_feedback = models.BooleanField(blank=True, null=False, default=False)
     class Meta:
         model = Result
         fields = "__all__"
