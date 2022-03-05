@@ -31,10 +31,17 @@ def IndexView(request):
 
 def ImageView(request):
     if request.method == "POST":
-        print(request)
-        file = request.FILES.get["image"]
-        file_name = default_storage.save(file.name, file)
+        print("BEFORE GET IMAGE")
+        file = request.FILES["ImageFile"]
+        print('IMAGE RECEIVED')
 
+        file_name = default_storage.save(file.name, file)
+        file_name='test'
+        t = Prediction.objects.create(image = file, name=file_name)
+        t.save()
+        print(t.pk)
+        print(t.image.url)
+        print(t.image)
         # Prediction.objects.create(name=file_name, image=file)
         file_url = default_storage.path(file_name)
         img = image.load_img(file_url, target_size=(150, 150))
