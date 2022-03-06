@@ -12,4 +12,4 @@ exclude =
     coverage
     coverage.xml
 
-max-line-length = 99
+max-line-length = 115

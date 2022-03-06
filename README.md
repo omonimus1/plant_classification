@@ -1,15 +1,23 @@
 # Flower Classifier 🍃
 
+#### Status
+[![PIPELINE status](https://github.com/omonimus1/plant_classification/actions/workflows/django.yml/badge.svg)](https://github.com/Potatoapp/backend-and-services-potato/actions/workflows/django.yml)
+[![codecov develop](https://codecov.io/gh/omonimus1/plant_classification/branch/develop/graph/badge.svg?token=MXVI6OEXK9)](https://codecov.io/gh/omonimus1/plant_classification)
+[![codecov main](https://codecov.io/gh/omonimus1/plant_classification/branch/main/graph/badge.svg?token=MXVI6OEXK9)](https://codecov.io/gh/omonimus1/plant_classification)
+
+
 The current repository hosts Davide Pollicino Honours Project.
-The project (still under implementation), 
-offers research documentation related the implementation of a **Flower Classifier**. 
+The project (still under implementation),
+offers research documentation related the implementation of a **Flower Classifier**.
+
+### CNN details
+* The CNN implements has been build using the technologies listed below.
+So far, it is possible to classify the following categories of flowers: Tulip, Sunflower, Rose, dandelion, daisy.
 
 #### Project assets
 * Jupiter Notebook
 * [Web app](webAppClassifier/README.md)
 * [Mobile Application](recognition_app/README.md)
-
-
 #### Technologies
 
 <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white">
@@ -21,12 +29,18 @@ offers research documentation related the implementation of a **Flower Classifie
 <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white">
 <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
 
--------
-
-### What does picker model file contains?
-Pickle is used for serializing and de-serializing Python object structures, also called marshalling or flattening.
-
-Pickling is useful for applications where you need some degree of persistency in your data. Your program's state data can be saved to disk, so you can continue working on it later on. It can also be used to send data over a Transmission Control Protocol (TCP) or socket connection, or to store python objects in a database.
-
-## When Not To Use pickle
-If you want to use data across different programming languages, pickle is not recommended. Its protocol is specific to Python, 
+###  Coding style and quality check and dependencies for code checks
+* Coding style: Black
+* Python Lint: Flake8, flake8-todos
+* mypy (for english type checking)
+* trim (to trim files)
+* autopep8 (to automatically reformat a python file in according to pep8 directive)
+* black (For code quality check purposes)
+```
+# format folder
+black folder_name
+# Remote all white spaces from project files
+trim .
+# Format file to improve syntax in according to flake8 (yes -> 2 times --aggressive)
+autopep8 --in-place --aggressive --aggressive filename.py
+```

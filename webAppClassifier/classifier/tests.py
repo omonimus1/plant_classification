@@ -4,6 +4,7 @@ from django.test import RequestFactory
 from .models import UserContactRequest
 from .views import IndexView, ImageView
 
+<<<<<<< HEAD
 
 class UserContactTest(TestCase):
     @classmethod
@@ -35,3 +36,10 @@ class IndexViewTestCase(TestCase):
         req.user = AnonymousUser()
         resp = IndexView(req, *[], **{})
         self.assertEqual(resp.status_code, 200)
+=======
+# Create your tests here.
+class AnimalTestCase(TestCase):
+
+    def test_animals_can_speak(self):
+        self.assertEqual('hello', 'hello')
+>>>>>>> dev

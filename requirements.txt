@@ -6,6 +6,7 @@ matplotlib
 opencv-python
 pandas
 pillow
+django_rest_framework
 keras
 flake8
 flake8-todos
@@ -18,3 +19,5 @@ dj-database-url
 gunicorn
 whitenoise
 djangorestframework
+django-environ
+
