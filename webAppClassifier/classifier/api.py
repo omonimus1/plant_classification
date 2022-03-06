@@ -1,9 +1,13 @@
-"""
-from rest_framework.generics import UpdateAPIView
-from .models import Prediction
+from rest_framework import generics
+# from django.http import JsonResponse
+from rest_framework import status
+from rest_framework.response import Response
 
+from .models import Result
+from .serializers import LeaveFeedbackSerializer
+
+"""
 # Prediction Model section
-from .forms import ProfileForm
 
 import pickle
 from tensorflow.keras.preprocessing import image
@@ -70,13 +74,15 @@ def predict_image(img_array):
     pred_digits = np.argmax(prediction, axis=1)
     print(pred_digits)
 
+"""
 
-class PredictionFeedbackApi(GenericAPIView):
-    serializer_class = PredictionSerializer
+
+class PredictionFeedbackApi(generics.GenericAPIView):
+    serializer_class = LeaveFeedbackSerializer
     queryset = Result.objects.all()
 
     def post(self, request):
-        serializer = PredictionSerializer(data=request.data)
+        serializer = LeaveFeedbackSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(
@@ -84,6 +90,4 @@ class PredictionFeedbackApi(GenericAPIView):
             )
         else:
             return Response(
-                {"status": "error", "data": serializer.errors}, status=status.HTTP_200_OK
-
-"""
+                {"status": "error", "data": serializer.errors}, status=status.HTTP_200_OK)

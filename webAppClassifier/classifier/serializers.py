@@ -1,6 +1,7 @@
-"""
-from .models import Prediction
 from django.db import models
+from rest_framework import serializers
+
+from .models import Prediction
 
 
 class PredictionSerializer(serializers.ModelSerializer):
@@ -8,5 +9,15 @@ class PredictionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Prediction
-        fields = "image"
-"""
+        fields = ("image")
+
+
+class LeaveFeedbackSerializer(serializers.ModelSerializer):
+    image = models.ForeignKey(Prediction, on_delete=models.CASCADE)
+    expected_result = models.CharField(
+        max_length=100, blank=True, null=False, default=""
+    )
+
+    class Meta:
+        model = Prediction
+        fields = "__all__"
