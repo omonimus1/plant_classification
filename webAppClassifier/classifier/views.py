@@ -1,73 +1,28 @@
-from re import template
-from django.shortcuts import render
-from django.views.generic import DetailView
-from .forms import ProfileForm
-from .models import Prediction
-from .api import ClassifyFlowerAPI, predict_image
-from django.core.files.storage import default_storage
-
-# Create your views here.
-def Index(request):
-    return render(request, "index.html")
-
-
-from rest_framework.generics import UpdateAPIView
-import json
-from django.http.response import JsonResponse
-from rest_framework.response import Response
-from .models import Prediction
-
-# Prediction Model section
-from .forms import ProfileForm
-
+import os
 import pickle
-from tensorflow.keras.preprocessing import image
-import tensorflow as tf
-from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
-import numpy as np
-import matplotlib.pyplot as plt
-from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
-import os
-import shutil
-from os.path import isfile, join, abspath, exists, isdir, expanduser
-from os import listdir, makedirs, getcwd, remove
-from pathlib import Path
-import requests
-
-
 from . import predictor
-
-# Data visualisation
-import pandas as pd
-
-# Image manipulation
-from PIL import Image
-import cv2
-
-# Specifically for manipulating zipped images and getting numpy arrays of pixel values of images.
-import matplotlib.pyplot as plt
-import matplotlib.image as mimg
 import numpy as np
-
-# Plotting library
-from mpl_toolkits.mplot3d import Axes3D  # needed to plot 3-D surfaces
-
-# dl libraries specifically for CNN
-from keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
+from django.core.files.storage import default_storage
+from django.shortcuts import render
 from tensorflow.keras.models import Sequential
-from keras import optimizers
-import os
+from tensorflow.keras.preprocessing import image
 
+
+module_dir = os.path.dirname(__file__)  # get current directory
+module_path = os.path.join(module_dir, "classifier.pkl")
 model = Sequential()
 current_directory = os.getcwd()
 model_path = current_directory + "classifier.pkl"
 model = pickle.load(
     open(
-        "/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/classifier.pkl",
+        module_path,
         "rb",
     )
 )
-import requests
+
+
+def Index(request):
+    return render(request, "index.html")
 
 
 def ImageView(request):

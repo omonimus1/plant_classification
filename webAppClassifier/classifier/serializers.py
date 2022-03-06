@@ -9,4 +9,4 @@ class PredictionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prediction
         fields = "image"
-""
+"""

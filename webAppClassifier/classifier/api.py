@@ -1,7 +1,5 @@
+"""
 from rest_framework.generics import UpdateAPIView
-import json
-from django.http.response import JsonResponse
-from rest_framework.response import Response
 from .models import Prediction
 
 # Prediction Model section
@@ -9,37 +7,21 @@ from .forms import ProfileForm
 
 import pickle
 from tensorflow.keras.preprocessing import image
-import tensorflow as tf
-from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 import os
-import shutil
-from os.path import isfile, join, abspath, exists, isdir, expanduser
-from os import listdir, makedirs, getcwd, remove
+
 from pathlib import Path
 
-# Data visualisation
-import pandas as pd
-
-# Image manipulation
-from PIL import Image
-import cv2
 
 # Specifically for manipulating zipped images and getting numpy arrays of pixel values of images.
 import matplotlib.pyplot as plt
-import matplotlib.image as mimg
 import numpy as np
 
-# Plotting library
-from mpl_toolkits.mplot3d import Axes3D  # needed to plot 3-D surfaces
 
 # dl libraries specifically for CNN
-from keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
-from keras import optimizers
 import os
 
 
@@ -74,13 +56,12 @@ class ClassifyFlowerAPI(UpdateAPIView):
 
 def predict_image(img_array):
     print("ciao")
-    """
     img_path = picture_url
     print('BEFORE LOAD')
     img = image.load_img(img_path, target_size=(150, 150))
     print('BEFORE IMG TO ARRAY')
     img_array = image.img_to_array(img)
-    """
+
     print("BEFORE EXPAND DIMS")
     img_batch = np.expand_dims(img_array, axis=0)
     print("BEFORE PREDICT")
@@ -90,7 +71,6 @@ def predict_image(img_array):
     print(pred_digits)
 
 
-"""
 class PredictionFeedbackApi(GenericAPIView):
     serializer_class = PredictionSerializer
     queryset = Result.objects.all()
