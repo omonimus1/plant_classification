@@ -6,5 +6,15 @@ matplotlib
 opencv-python
 pandas
 pillow
-django_rest_framework
 keras
+flake8
+flake8-todos
+trim
+autopep8
+black # For code quality check purposes
+mypy # for english type checking
+django-environ
+dj-database-url
+gunicorn
+whitenoise
+djangorestframework
