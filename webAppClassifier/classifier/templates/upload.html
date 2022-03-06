@@ -1,37 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Upload Your Image</title>
-        <link href="{% static 'css\base.css' %}" rel='stylesheet'>
-    </head>
-    <body>
-        {% block content %}
-    <section style="padding-left: 100px; padding-right:100px; padding-bottom:50px; ">
-        <div class="row">
-            <div class="col-6">
-                <div id="form" id="classifier">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input type="file" name="imageFile" />
-                        <input type="submit" name="submit" value="Upload" />
-                    </form>
-                </div>
+
+{% block content %}
+<section style="padding-left: 100px; padding-right:100px; padding-bottom:50px; min-height:50vh; ">
+    <div class="row">
+        <div class="col-6">
+            <div id="form" id="classifier">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="imageFile"/>
+                    <input type="submit" name="submit" value="Upload"/>
+                </form>
             </div>
+        </div>
 
             <div class="col-6">
                 <span class='logo'>Image Uploaded</span> </br>
                 {% if predictions %}
-                    <img src="{{file.url}}" alt="{{file.name}}" style="max-height:100px; max-width:100px;">
-                    <p> {{predictions}} </p>
+                <img src="{{file.url}}" alt="{{file.name}}" style="max-height:100px; max-width:100px;">
+                <p> {{predictions}} </p>
                 {% endif %}
             </div>
-        </div>
+    </div>
 
-    </section>
+</section>
 
-    </body>
-    {% endblock content %}
-</html>
+{% endblock content %}
