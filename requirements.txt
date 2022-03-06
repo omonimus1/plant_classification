@@ -20,4 +20,5 @@ gunicorn
 whitenoise
 djangorestframework
 django-environ
+pre-commit
 
