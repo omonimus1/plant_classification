@@ -1,21 +1,7 @@
 from django.contrib.auth.models import AnonymousUser
-from django.test import RequestFactory
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 
-from .models import UserContactRequest
-from .views import IndexView, ImageView
-
-
-class UserContactTest(TestCase):
-    @classmethod
-    def setUp(self):
-        UserContactRequest.objects.create(
-            name="Davide", message="Hi, is prediction working?"
-        )
-
-    def testSupportUserName(self):
-        userRequest = UserContactRequest.objects.get(pk=1)
-        self.assertEquals(userRequest.name, "Davide")
+from .views import Index, ImageView
 
 
 class ImageViewTestCase(TestCase):
@@ -34,5 +20,5 @@ class IndexViewTestCase(TestCase):
     def test_get(self):
         req = RequestFactory().get("")
         req.user = AnonymousUser()
-        resp = IndexView(req, *[], **{})
+        resp = Index(req, *[], **{})
         self.assertEqual(resp.status_code, 200)
