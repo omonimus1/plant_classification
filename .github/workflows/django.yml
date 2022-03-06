@@ -37,9 +37,7 @@ jobs:
           trim .
       - name: Check Code Quality
         working-directory: ./webAppClassifier
-        run: |
-          pip3 install flake8 flake8-todos black
-          flake8
+        run: flake8
       - uses: codecov/codecov-action@v2
       - name: Run Tests and Upload coverage testing
         working-directory: ./webAppClassifier
@@ -48,4 +46,4 @@ jobs:
           DEBUG: False
         run: |
           python manage.py test
-          pip install codecov && codecov -t 23e7f1fe-6679-4642-8ed3-e46f4478f240
+          pip install codecov && codecov -t ${{ secrets.CODECOV_TOKEN }} 
