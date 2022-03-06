@@ -2,9 +2,9 @@ name: PIPELINE Testing
 
 on:
   push:
-    branches: [ develop, dev, master, staging ]
+    branches: [ develop, main, master, staging ]
   pull_request:
-    branches: [ develop, dev, master, staging ]
+    branches: [ develop, main, master, staging ]
 
 jobs:
   build:
@@ -15,21 +15,32 @@ jobs:
         python-version: [3.9]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-      
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Check Code Quality
-      run: |
-        flake8
-    - uses: codecov/codecov-action@v2
-    - name: Run Tests and Upload coverage testing
-      run: |
-        python3 manage.py test
-        codecov -t 23e7f1fe-6679-4642-8ed3-e46f4478f240
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Format code in according to blake
+        working-directory: ./webAppClassifier
+        run: |
+          black webAppClassifier
+          black classifier
+      - name: Trim files
+        run: |
+          pip3 install trim
+          trim .
+      - name: Check Code Quality
+        run: |
+          pip3 install flake8 flake8-todos black
+          flake8
+      - uses: codecov/codecov-action@v2
+      - name: Run Tests and Upload coverage testing
+        working-directory: ./webAppClassifier
+        run: |
+          python3 manage.py test
+          pip install codecov && codecov -t 23e7f1fe-6679-4642-8ed3-e46f4478f240
