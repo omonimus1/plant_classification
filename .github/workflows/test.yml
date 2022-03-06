@@ -1,4 +1,4 @@
-name: PIPELINE Testing
+name: Test
 
 on:
   push:
@@ -7,8 +7,10 @@ on:
     branches: [ develop, dev,  main, master, staging ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    environment: 
+      name: development
     strategy:
       max-parallel: 4
       matrix:
@@ -42,8 +44,8 @@ jobs:
       - name: Run Tests and Upload coverage testing
         working-directory: ./webAppClassifier
         env:
-          SECRET_KEY: 3que!@rl5qknstzcq6yn+6$bflk=htdwc!(+s1_(dzv5hes&ue
-          DEBUG: False
+          SECRET_KEY: ${{ secrets.SECRET_KEY }} 
+          DEBUG: ${{ secrets.DEBUG }} 
         run: |
           python manage.py test
-          pip install codecov && codecov -t ${{ secrets.COV_TOKEN }} 
+          pip install codecov && codecov -t ${{ secrets.CODCOV_TOKEN }} 
