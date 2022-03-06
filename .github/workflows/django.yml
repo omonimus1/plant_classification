@@ -31,10 +31,12 @@ jobs:
           black webAppClassifier
           black classifier
       - name: Trim files
+        working-directory: ./webAppClassifier
         run: |
           pip3 install trim
           trim .
       - name: Check Code Quality
+        working-directory: ./webAppClassifier
         run: |
           pip3 install flake8 flake8-todos black
           flake8
