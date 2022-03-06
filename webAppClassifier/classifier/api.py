@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 from rest_framework.generics import UpdateAPIView
 from .models import Prediction
@@ -88,5 +87,3 @@ class PredictionFeedbackApi(GenericAPIView):
                 {"status": "error", "data": serializer.errors}, status=status.HTTP_200_OK
 
 """
-=======
->>>>>>> dev
