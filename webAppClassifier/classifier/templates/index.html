@@ -1,6 +1,10 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
 
+<<<<<<< HEAD
+
+{% block content %}
+=======
 <html lang="en">
 	<head>
 		<meta charset="utf-8" >
@@ -80,6 +84,7 @@
 		</header>
 
 	<body>
+>>>>>>> dev
 		<!-- Feature 34 -->
 		<section class="pt-10 pb-120 bg-light feature_34">
 			<div class="container px-xl-0">
@@ -111,7 +116,7 @@
 						<img src="{% static 'i/application_2_img_1.png' %}" alt="" class="img-fluid application_2_left_img" />
 					</div>
 					<div class="col-md-7 col-xl-6">
-						<h2 class="col-lg-11 color-main">To Be Proud by Your Application</h2>
+						<h2 class="col-lg-11 color-main" id="about">The flower recognizer</h2>
 						<div class="mt-25 col-lg-9 color-heading f-18 text-adaptive">
 							<p>You can both use our A.I. to recognize a flower from the <a href="#classifier">recognize section</a> , or by using our mobile application!</p>
 						</div>
@@ -222,20 +227,7 @@
 			</div>
 		</section>
 
-	</body>
 
-
-
-		<!-- gReCaptcha popup (uncomment if you need a recaptcha integration) -->
-		<!--
-		<div class="bg-dark op-8 grecaptcha-overlay"></div>
-		<div class="bg-light radius10 w-350 h-120 px-20 pt-20 pb-20 grecaptcha-popup">
-			<div class="w-full h-full d-flex justify-content-center align-items-center">
-				<div id="g-recaptcha" data-sitekey="PUT_YOUR_SITE_KEY_HERE"></div>
-			</div>
-		</div>
-		<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
-		-->
 		<!-- Bootstrap 4.3.1 JS -->
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 		<!-- Fancybox 3 jQuery plugin JS (Open images and video in popup) -->
@@ -250,5 +242,5 @@
 		<script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
 		<!-- Startup 3 JS (Custom js for all blocks) -->
 		<script src="{% static 'js/script.js'%}"></script>
-	</body>
-</html>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% endblock %}

@@ -1,3 +1,31 @@
+<<<<<<< HEAD
+import os
+import pickle
+from . import predictor
+import numpy as np
+from django.core.files.storage import default_storage
+from django.shortcuts import render
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.preprocessing import image
+
+
+module_dir = os.path.dirname(__file__)  # get current directory
+module_path = os.path.join(module_dir, "classifier.pkl")
+model = Sequential()
+current_directory = os.getcwd()
+model_path = current_directory + "classifier.pkl"
+model = pickle.load(
+    open(
+        module_path,
+        "rb",
+    )
+)
+
+
+def Index(request):
+    return render(request, "index.html")
+
+=======
 
 import pickle
 import os
@@ -24,6 +52,7 @@ model = pickle.load(
 def Index(request):
     return render(request, "index.html")
 
+>>>>>>> dev
 
 def ImageView(request):
     if request.method == "POST":
@@ -42,6 +71,11 @@ def ImageView(request):
         return render(
             request,
             "upload.html",
+<<<<<<< HEAD
+            {"predictions": predictor.flower_identification[pred_digits[0]]},
+        )
+    return render(request, "upload.html")
+=======
             {
                 "predictions": predictor.flower_identification[pred_digits[0]],
                 "image": file_url,
@@ -49,9 +83,18 @@ def ImageView(request):
         )
     else:
         return render(request, "upload.html")
+>>>>>>> dev
 
 
 def Display(request):
     if request.method == "GET":
+<<<<<<< HEAD
+        return render(request, "display.html")
+
+
+def thanks(request):
+    return render(request, "thank-you.html")
+=======
         img = Prediction.objects.all()
         return render(request, "display.html", {"profile_img": img})
+>>>>>>> dev
