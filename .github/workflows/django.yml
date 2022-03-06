@@ -43,6 +43,9 @@ jobs:
       - uses: codecov/codecov-action@v2
       - name: Run Tests and Upload coverage testing
         working-directory: ./webAppClassifier
+        env:
+          SECRET_KEY: 3que!@rl5qknstzcq6yn+6$bflk=htdwc!(+s1_(dzv5hes&ue
+          DEBUG: False
         run: |
-          python3 manage.py test
+          python manage.py test
           pip install codecov && codecov -t 23e7f1fe-6679-4642-8ed3-e46f4478f240
