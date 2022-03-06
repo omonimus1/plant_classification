@@ -1,12 +1,13 @@
-
 import os
 import pickle
-from . import predictor
+
 import numpy as np
 from django.core.files.storage import default_storage
 from django.shortcuts import render
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing import image
+
+from . import predictor
 from .models import Prediction
 
 module_dir = os.path.dirname(__file__)  # get current directory
@@ -55,4 +56,3 @@ def Display(request):
 
 def thanks(request):
     return render(request, "thank-you.html")
-
