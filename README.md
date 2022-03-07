@@ -1,7 +1,8 @@
 # Flower Classifier 🍃
 
 #### Status
-[![PIPELINE Testing](https://github.com/omonimus1/plant_classification/actions/workflows/django.yml/badge.svg)](https://github.com/omonimus1/plant_classification/actions/workflows/django.yml)
+[![Test](https://github.com/omonimus1/plant_classification/actions/workflows/test.yml/badge.svg)](https://github.com/omonimus1/plant_classification/actions/workflows/test.yml)
+
 [![codecov](https://codecov.io/gh/omonimus1/plant_classification/branch/dev/graph/badge.svg?token=MXVI6OEXK9)](https://codecov.io/gh/omonimus1/plant_classification)
 
 The current repository hosts Davide Pollicino Honours Project.The project (still under implementation),
