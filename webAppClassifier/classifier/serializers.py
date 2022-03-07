@@ -1,7 +1,7 @@
 from django.db import models
 from rest_framework import serializers
 
-from .models import Prediction
+from .models import Prediction, Result
 
 
 class PredictionSerializer(serializers.ModelSerializer):
@@ -19,5 +19,5 @@ class LeaveFeedbackSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = Prediction
+        model = Result
         fields = "__all__"
