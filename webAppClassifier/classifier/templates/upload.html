@@ -18,7 +18,7 @@
                 <span class='logo'>Image Uploaded</span> </br>
                 {% if predictions %}
                 <img src="{{file.url}}" alt="{{file.name}}" style="max-height:100px; max-width:100px;">
-                <p> {{predictions}} </p>
+                <p> {{predictions}} {{ id }}</p>
                 <!-- Button to Open the Modal -->
                 <button class="btn btn-primary" data-target="#myModal" data-toggle="modal" type="button">
                     Was the prediction correct?
@@ -40,7 +40,8 @@
                                 <form>
                                     <div class="form-group">
                                         <label class="col-form-label" for="recipient-name">Expected result</label>
-                                        <input class="form-control" id="expected" name="expected" type="text">
+                                        <input class="form-control" id="expected_result" name="expected_result" required
+                                               type="text">
                                     </div>
                                 </form>
                             </div>
@@ -50,7 +51,7 @@
                                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Yes, it was
                                     correct
                                 </button>
-                                <button class="btn btn-primary" id="send-feedback" onclick="UploadFeedback()"
+                                <button class="btn btn-primary" onclick="UploadFeedback()"
                                         type="button">Send Expected Prediction
                                 </button>
                             </div>
@@ -70,14 +71,15 @@
 
 <script>
             function UploadFeedback() {
+              var predictionFeedback = $("#expected_result").val();
               $.ajax({
                 url: "http://127.0.0.1:8000/leave-feedback",
                 type: "POST",
                 headers: {'X-CSRFToken': csrftoken},
                 mode: 'same-origin', // Do not send CSRF token to another domain.
                 data: {
-                    "expected_result": "Test AJAX",
-                    "image": 81
+                    "expected_result": predictionFeedback,
+                    "image": {{ id }}
                 },
                 success: function(result) {
                   alert('Feedback STORED');

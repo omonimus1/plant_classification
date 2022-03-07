@@ -32,8 +32,8 @@ def ImageView(request):
         file = request.FILES["imageFile"]
         file_name = default_storage.save(file.name, file)
 
-        Prediction.objects.create(name=file_name, image=file)
-
+        p = Prediction.objects.create(name=file_name, image=file)
+        p.save()
         file_url = default_storage.path(file_name)
         img = image.load_img(file_url, target_size=(150, 150))
         img_array = image.img_to_array(img)
@@ -44,7 +44,7 @@ def ImageView(request):
         return render(
             request,
             "upload.html",
-            {"predictions": predictor.flower_identification[pred_digits[0]]},
+            {"predictions": predictor.flower_identification[pred_digits[0]], "id": p.pk},
         )
     return render(request, "upload.html")
 
