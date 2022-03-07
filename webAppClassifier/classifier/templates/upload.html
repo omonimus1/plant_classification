@@ -61,7 +61,35 @@
                     {% endif %}
                 </div>
             </div>
+</section>
+{% csrf_token %}
+<script>
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+</script>
+
+<script>
+            function UploadFeedback() {
+              $.ajax({
+                url: "http://127.0.0.1:8000/leave-feedback",
+                type: "POST",
+                headers: {'X-CSRFToken': csrftoken},
+                mode: 'same-origin', // Do not send CSRF token to another domain.
+                data: {
+                    "expected_result": "Test AJAX",
+                    "image": 81
+                },
+                success: function(result) {
+                  alert('Feedback STORED');
+                },
+                error: function(error) {
+                  alert('ERROR WHILE SAVING FEEDBACK');
+                  console.log(error);
+                }
+              });
+            }
+
+</script>
 </section>
 
 {% endblock content %}
