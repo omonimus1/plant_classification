@@ -19,9 +19,48 @@
                 {% if predictions %}
                 <img src="{{file.url}}" alt="{{file.name}}" style="max-height:100px; max-width:100px;">
                 <p> {{predictions}} </p>
-                {% endif %}
+                <!-- Button to Open the Modal -->
+                <button class="btn btn-primary" data-target="#myModal" data-toggle="modal" type="button">
+                    Was the prediction correct?
+                </button>
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Was the prediction correct?</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="recipient-name">Expected result</label>
+                                        <input class="form-control" id="expected" name="expected" type="text">
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Yes, it was
+                                    correct
+                                </button>
+                                <button class="btn btn-primary" id="send-feedback" onclick="UploadFeedback()"
+                                        type="button">Send Expected Prediction
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>  <!-- Button to Open the Modal -->
+
+                    {% endif %}
+                </div>
             </div>
-    </div>
 
 </section>
 
