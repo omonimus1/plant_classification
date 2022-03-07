@@ -1,80 +1,56 @@
+import os
+import pickle
+
+import numpy as np
+from django.core.files.storage import default_storage
+from django.http import JsonResponse
 from rest_framework import generics
-# from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
-
-from .models import Result
-from .serializers import LeaveFeedbackSerializer
-
-"""
-# Prediction Model section
-
-import pickle
-from tensorflow.keras.preprocessing import image
-import numpy as np
-import matplotlib.pyplot as plt
-from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
-import os
-
-from pathlib import Path
-
-
-# Specifically for manipulating zipped images and getting numpy arrays of pixel values of images.
-import matplotlib.pyplot as plt
-import numpy as np
-
-
-# dl libraries specifically for CNN
 from tensorflow.keras.models import Sequential
-import os
+from tensorflow.keras.preprocessing import image
 
+from . import predictor
+from .models import Result, Prediction
+from .serializers import LeaveFeedbackSerializer, PredictionSerializer
 
+module_dir = os.path.dirname(__file__)  # get current directory
+module_path = os.path.join(module_dir, "classifier.pkl")
 model = Sequential()
 current_directory = os.getcwd()
 model_path = current_directory + "classifier.pkl"
 model = pickle.load(
     open(
-        "/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/classifier.pkl",
+        module_path,
         "rb",
     )
 )
 
 
-class ClassifyFlowerAPI(UpdateAPIView):
+class PredictionAPI(generics.GenericAPIView):
+    serializer_class = PredictionSerializer
     queryset = Prediction.objects.all()
-    # serializer_class = UserSerializer
-    # permission_classes = [IsActive, IsAuthenticated,]
 
     def post(self, request):
-        profile_form = ProfileForm(data=request.POST, files=request.FILES)
-        if profile_form.is_valid():
-            image = profile_form.instance
-            name = "GNAGNA"
-            single_prediction = Prediction(name=name, image=image)
-            single_prediction.save()
-            print(single_prediction.image.url)
-            #
-            # profile_form.save()
-            predict_image(single_prediction.image.url)
+        file = request.FILES.get["imageFile"]
+        print('GOT FILE')
+        file_name = default_storage.save(file.name, file)
+        p = Prediction.objects.create(name='file_name', image=file)
+        p.save()
+        print('AFTER SAVE')
+        file_url = default_storage.path(p.image)
+        img = image.load_img(file_url, target_size=(150, 150))
+        img_array = image.img_to_array(img)
+        img_batch = np.expand_dims(img_array, axis=0)
+        prediction = model.predict(img_batch)
+        pred_digits = np.argmax(prediction, axis=1)
+        print(pred_digits)
+        data = {
+            "predictions": predictor.flower_identification[pred_digits[0]],
+            "id": p.pk
+        }
 
-
-def predict_image(img_array):
-    print("ciao")
-    img_path = picture_url
-    print('BEFORE LOAD')
-    img = image.load_img(img_path, target_size=(150, 150))
-    print('BEFORE IMG TO ARRAY')
-    img_array = image.img_to_array(img)
-
-    print("BEFORE EXPAND DIMS")
-    img_batch = np.expand_dims(img_array, axis=0)
-    print("BEFORE PREDICT")
-    prediction = model.predict(img_batch)
-    print("BEFORE ARGMAX")
-    pred_digits = np.argmax(prediction, axis=1)
-    print(pred_digits)
-
-"""
+        return JsonResponse(data, status=status.HTTP_200_OK)
 
 
 class PredictionFeedbackApi(generics.GenericAPIView):
