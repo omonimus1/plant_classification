@@ -46,7 +46,6 @@
 		</div>
 	</nav>
 
-
         {% block content %}
         {% endblock %}
 
@@ -65,11 +64,11 @@
 					<div class="modal-body">
 						<form>
 							<div class="form-group">
-								<label class="col-form-label" for="recipient-name">Userame</label>
-								<input class="form-control" id="username" name="username" required
+								<label class="col-form-label" for="username_login">Userame</label>
+								<input class="form-control" id="username_login" name="username_login" required
 									   type="text">
-								<label class="col-form-label" for="recipient-name">Password</label>
-								<input class="form-control" id="password" name="password" required
+								<label class="col-form-label" for="password_login">Password</label>
+								<input class="form-control" id="password_login" name="password_login" required
 										type="password">
 							</div>
 						</form>
@@ -77,7 +76,7 @@
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-						<button class="btn btn-primary" onclick=""type="button">Login</button>
+						<button class="btn btn-primary" onclick="login()"type="button">Login</button>
 					</div>
 				</div>
 			</div>  
@@ -97,22 +96,22 @@
 					<div class="modal-body">
 						<form>
 							<div class="form-group">
-								<label class="col-form-label" for="recipient-name">Userame</label>
-								<input class="form-control" id="username" name="username" required
+								<label class="col-form-label" for="username_register">Userame</label>
+								<input class="form-control" id="username_register" name="username_register" required
 									   type="text">
-								<label class="col-form-label" for="recipient-name">First name</label>
-								<input class="form-control" id="first_name" name="first_name" required
+								<label class="col-form-label" for="first_name_register">First name</label>
+								<input class="form-control" id="first_name_register" name="first_name_register" required
 										type="text">
 
-								<label class="col-form-label" for="recipient-name">Last Name</label>
-								<input class="form-control" id="last_name" name="last_name" required
+								<label class="col-form-label" for="last_name_register">Last Name</label>
+								<input class="form-control" id="last_name_register" name="last_name_register" required
 										type="text">
 
-								<label class="col-form-label" for="recipient-name">email</label>
-								<input class="form-control" id="email" name="email" required
+								<label class="col-form-label" for="email_register">email</label>
+								<input class="form-control" id="email_register" name="email_register" required
 									type="email">
-								<label class="col-form-label" for="recipient-name">Password</label>
-								<input class="form-control" id="password" name="password" required
+								<label class="col-form-label" for="password_register">Password</label>
+								<input class="form-control" id="password_register" name="password_register" required
 										type="password">
 							</div>
 						</form>
@@ -120,7 +119,7 @@
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-						<button class="btn btn-primary" onclick=""type="button">Login</button>
+						<button class="btn btn-primary" onclick="register()"type="button">Login</button>
 					</div>
 				</div>
 			</div>  
@@ -165,6 +164,55 @@
 				</div>
 			</div>
 		</footer>
+		{% csrf_token %}
+		<script>
+				const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		</script>
+		<script>
+			function login() {
+			  $.ajax({
+				url: "http://127.0.0.1:8000/api/token/",
+				type: "POST",
+				headers: {'X-CSRFToken': csrftoken},
+				mode: 'same-origin', // Do not send CSRF token to another domain.
+				data: {
+					"username": $("#username_login").val(),
+					"password": $('#password_login').val()
+				},
+				success: function(result) {
+				  alert('logged in');
+				},
+				error: function(error) {
+				  alert('ERROR WHILE SAVING FEEDBACK');
+				  console.log(error);
+				}
+			  });
+			}
+		</script>
 
+		<script>
+			function register() {
+			  $.ajax({
+				url: "http://127.0.0.1:8000/api/register",
+				type: "POST",
+				headers: {'X-CSRFToken': csrftoken},
+				mode: 'same-origin', // Do not send CSRF token to another domain.
+				data: {
+					"username": $("#username_register").val(),
+					"password":  $("#password_register").val(),
+					"first_name":  $("#first_name_register").val(),
+					"last_name": $("#last_name_register").val(),
+					"email": $("email_register").val()
+				},
+				success: function(result) {
+				  alert('registered');
+				},
+				error: function(error) {
+				  alert('ERROR WHILE SAVING FEEDBACK');
+				  console.log(error);
+				}
+			  });
+			}
+		</script>
 	</body>
 </html>
