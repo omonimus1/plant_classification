@@ -66,33 +66,28 @@
 {% csrf_token %}
 <script>
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-
 </script>
-
 <script>
-            function UploadFeedback() {
-              var predictionFeedback = $("#expected_result").val();
-              $.ajax({
-                url: "http://127.0.0.1:8000/leave-feedback",
-                type: "POST",
-                headers: {'X-CSRFToken': csrftoken},
-                mode: 'same-origin', // Do not send CSRF token to another domain.
-                data: {
-                    "expected_result": predictionFeedback,
-                    "image": {{ id }}
-                },
-                success: function(result) {
-                  window.location.replace("thanks");
-                },
-                error: function(error) {
-                  alert('ERROR WHILE SAVING FEEDBACK');
-                  console.log(error);
-                }
-              });
-            }
-
-
+    function UploadFeedback() {
+      var predictionFeedback = $("#expected_result").val();
+      $.ajax({
+        url: "http://127.0.0.1:8000/leave-feedback",
+        type: "POST",
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin', // Do not send CSRF token to another domain.
+        data: {
+            "expected_result": predictionFeedback,
+            "image": {{ id }}
+        },
+        success: function(result) {
+          window.location.replace("thanks");
+        },
+        error: function(error) {
+          alert('ERROR WHILE SAVING FEEDBACK');
+          console.log(error);
+        }
+      });
+    }
 </script>
 </section>
 

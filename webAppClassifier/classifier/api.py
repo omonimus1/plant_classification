@@ -3,10 +3,10 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
 
-from .models import Result
+from .models import Result, Prediction
 from .serializers import LeaveFeedbackSerializer
 
-"""
+
 # Prediction Model section
 
 import pickle
@@ -29,33 +29,40 @@ from tensorflow.keras.models import Sequential
 import os
 
 
+module_dir = os.path.dirname(__file__)
+module_path = os.path.join(module_dir, "classifier.pkl")
 model = Sequential()
 current_directory = os.getcwd()
 model_path = current_directory + "classifier.pkl"
 model = pickle.load(
     open(
-        "/Users/davide/Desktop/university/honours/plant_classification/webAppClassifier/classifier/classifier.pkl",
+        module_path,
         "rb",
     )
 )
 
 
-class ClassifyFlowerAPI(UpdateAPIView):
+class ClassifyFlowerAPI(generics.GenericAPIView):
     queryset = Prediction.objects.all()
     # serializer_class = UserSerializer
     # permission_classes = [IsActive, IsAuthenticated,]
 
     def post(self, request):
-        profile_form = ProfileForm(data=request.POST, files=request.FILES)
-        if profile_form.is_valid():
-            image = profile_form.instance
-            name = "GNAGNA"
-            single_prediction = Prediction(name=name, image=image)
-            single_prediction.save()
-            print(single_prediction.image.url)
-            #
-            # profile_form.save()
-            predict_image(single_prediction.image.url)
+        file = request.FILES["imageFile"]
+        file_name = default_storage.save(file.name, file)
+
+        p = Prediction.objects.create(name=file_name, image=file)
+        p.save()
+        file_url = default_storage.path(file_name)
+        img = image.load_img(file_url, target_size=(150, 150))
+        img_array = image.img_to_array(img)
+        img_batch = np.expand_dims(img_array, axis=0)
+        prediction = model.predict(img_batch)
+        pred_digits = np.argmax(prediction, axis=1)
+        print(pred_digits)
+        return JsonRespons(
+        {"predictions": predictor.flower_identification[pred_digits[0]], "id": p.pk},
+        )
 
 
 def predict_image(img_array):
@@ -74,7 +81,6 @@ def predict_image(img_array):
     pred_digits = np.argmax(prediction, axis=1)
     print(pred_digits)
 
-"""
 
 
 class PredictionFeedbackApi(generics.GenericAPIView):
