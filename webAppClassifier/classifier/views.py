@@ -1,12 +1,10 @@
 import os
 import pickle
-
 import numpy as np
 from django.core.files.storage import default_storage
 from django.shortcuts import render
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing import image
-
 from . import predictor
 from .models import Prediction
 
@@ -39,12 +37,17 @@ def ImageView(request):
         prediction = model.predict(img_batch)
         pred_digits = np.argmax(prediction, axis=1)
         print(pred_digits)
-        p = Prediction.objects.create(name=predictor.flower_identification[pred_digits[0]], image=file)
+        p = Prediction.objects.create(
+            name=predictor.flower_identification[pred_digits[0]], image=file
+        )
         p.save()
         return render(
             request,
             "upload.html",
-            {"predictions": predictor.flower_identification[pred_digits[0]], "id": p.pk},
+            {
+                "predictions": predictor.flower_identification[pred_digits[0]],
+                "id": p.pk,
+            },
         )
     return render(request, "upload.html")
 

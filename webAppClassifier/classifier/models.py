@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Prediction(models.Model):
     name = models.CharField(max_length=200, blank=True)
     image = models.ImageField(upload_to="img/%Y/%m/%d/", blank=False)

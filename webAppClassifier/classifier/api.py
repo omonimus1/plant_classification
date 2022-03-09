@@ -1,35 +1,21 @@
-from rest_framework import generics
-# from django.http import JsonResponse
+import os
+import pickle
+import numpy as np
 from rest_framework import status
 from rest_framework.response import Response
-from .models import Result, Prediction
-from .serializers import LeaveFeedbackSerializer, RegisterSerializer, UserSerializer
-from rest_framework import generics, permissions, mixins
-from rest_framework.response import Response
-from django.contrib.auth.models import User
-
-# Prediction Model section
-
-import pickle
+from .models import Result, Prediction, Favorite
+from .serializers import (
+    LeaveFeedbackSerializer,
+    RegisterSerializer,
+    UserSerializer,
+    FavoriteSerializer,
+)
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from .import predictor
+from django.core.files.storage import default_storage
 from tensorflow.keras.preprocessing import image
-import numpy as np
-import matplotlib.pyplot as plt
-from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
-import os
-
-from pathlib import Path
-
-
-# Specifically for manipulating zipped images and getting numpy arrays of pixel values of images.
-import matplotlib.pyplot as plt
-import numpy as np
-
-
-# dl libraries specifically for CNN
 from tensorflow.keras.models import Sequential
-import os
-
-
 module_dir = os.path.dirname(__file__)
 module_path = os.path.join(module_dir, "classifier.pkl")
 model = Sequential()
@@ -61,17 +47,21 @@ class ClassifyFlowerAPI(generics.GenericAPIView):
         prediction = model.predict(img_batch)
         pred_digits = np.argmax(prediction, axis=1)
         print(pred_digits)
-        return JsonRespons(
-        {"predictions": predictor.flower_identification[pred_digits[0]], "id": p.pk},
+        return Response(
+            {
+                "predictions": predictor.flower_identification[pred_digits[0]],
+                "id": p.pk,
+            },
         )
 
 
+"""
 def predict_image(img_array):
     print("ciao")
     img_path = picture_url
-    print('BEFORE LOAD')
+    print("BEFORE LOAD")
     img = image.load_img(img_path, target_size=(150, 150))
-    print('BEFORE IMG TO ARRAY')
+    print("BEFORE IMG TO ARRAY")
     img_array = image.img_to_array(img)
 
     print("BEFORE EXPAND DIMS")
@@ -81,7 +71,7 @@ def predict_image(img_array):
     print("BEFORE ARGMAX")
     pred_digits = np.argmax(prediction, axis=1)
     print(pred_digits)
-
+"""
 
 
 class PredictionFeedbackApi(generics.GenericAPIView):
@@ -92,22 +82,57 @@ class PredictionFeedbackApi(generics.GenericAPIView):
         serializer = LeaveFeedbackSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(
-                {"status": "success"}, status=status.HTTP_200_OK
-            )
+            return Response({"status": "success"}, status=status.HTTP_200_OK)
         else:
             return Response(
-                {"status": "error", "data": serializer.errors}, status=status.HTTP_200_OK)
-
+                {"status": "error", "data": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
 
 class RegisterApi(generics.GenericAPIView):
     serializer_class = RegisterSerializer
-    def post(self, request, *args,  **kwargs):
+
+    def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        return Response({
-            "user": UserSerializer(user,  context=self.get_serializer_context()).data,
-            "message": "User Created Successfully.  Now perform Login to get your token",
-        })
+        return Response(
+            {
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "message": "User Created Successfully.  Now perform Login to get your token",
+            }
+        )
+
+
+class FavoriteFlower(generics.GenericAPIView):
+    serializer_class = FavoriteSerializer
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        """
+        Logged user is able to add a flower to add a prediction to the list of favorites
+        """
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        favorite = serializer.save()
+        return Response(
+            {"status": "Favourite added", "favorite": favorite},
+            status=status.HTTP_200_OK,
+        )
+
+    def get(self, request, *args, **kwargs):
+        """
+        Logged user is able to retrieve the list of favorite productions
+        """
+        user_id = request.user.id
+        user_favorites = Favorite.objects.filter(user=user_id)
+
+        return Response(
+            {
+                "favorite": user_favorites,
+            },
+            status=status.HTTP_200_OK,
+        )
