@@ -9,7 +9,7 @@
                 <form enctype="multipart/form-data" method="post">
                     {% csrf_token %}
                     <input name="imageFile" type="file"/>
-                    <input name="submit" type="submit" value="Upload"/>
+                <input name="submit" type="submit" value="Upload"/>
                 </form>
             </div>
         </div>
@@ -58,9 +58,9 @@
 
                     </div>
                 </div>  <!-- Button to Open the Modal -->
-
-                {% endif %}
             </div>
+            </div>
+            {% endif %}
         </div>
 </section>
 {% csrf_token %}
