@@ -21,3 +21,6 @@ whitenoise
 djangorestframework
 django-environ
 pre-commit
+markdown 
+django-filter 
+djangorestframework_simplejwt

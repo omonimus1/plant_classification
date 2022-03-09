@@ -2,10 +2,11 @@ from rest_framework import generics
 # from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
-
 from .models import Result, Prediction
-from .serializers import LeaveFeedbackSerializer
-
+from .serializers import LeaveFeedbackSerializer, RegisterSerializer, UserSerializer
+from rest_framework import generics, permissions, mixins
+from rest_framework.response import Response
+from django.contrib.auth.models import User
 
 # Prediction Model section
 
@@ -97,3 +98,16 @@ class PredictionFeedbackApi(generics.GenericAPIView):
         else:
             return Response(
                 {"status": "error", "data": serializer.errors}, status=status.HTTP_200_OK)
+
+
+
+class RegisterApi(generics.GenericAPIView):
+    serializer_class = RegisterSerializer
+    def post(self, request, *args,  **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            "user": UserSerializer(user,  context=self.get_serializer_context()).data,
+            "message": "User Created Successfully.  Now perform Login to get your token",
+        })
