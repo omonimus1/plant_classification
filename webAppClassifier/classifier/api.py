@@ -3,6 +3,7 @@ import pickle
 import numpy as np
 from rest_framework import status
 from rest_framework.response import Response
+from django.contrib.auth.models import User
 from .models import Result, Prediction, Favorite
 from .serializers import (
     LeaveFeedbackSerializer,
@@ -115,13 +116,20 @@ class FavoriteFlower(generics.GenericAPIView):
         """
         Logged user is able to add a flower to add a prediction to the list of favorites
         """
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        favorite = serializer.save()
-        return Response(
-            {"status": "Favourite added", "favorite": favorite},
-            status=status.HTTP_200_OK,
-        )
+        prediction_id = request.GET.get('prediction')
+        print('ID: ' +str(prediction_id))
+        if Prediction.objects.filter(pk=prediction_id).exists():
+            prediction = Prediction.objects.filter(pk=prediction_id).first()
+            Favorite.objects.create(user=request.user, prediction=prediction)
+            return Response(
+                {"status": "Prediction saved"},
+                status=status.HTTP_200_OK,
+            )
+        else:
+            return Response(
+                {"status": "Prediction not found - impossible to save your prediction as favorite"},
+                status=status.HTTP_404_NOT_FOUND,
+            )
 
     def get(self, request, *args, **kwargs):
         """

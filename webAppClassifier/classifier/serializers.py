@@ -54,10 +54,4 @@ class UserSerializer(serializers.ModelSerializer):
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favorite
-        fields = ("user", "prediction")
-
-        def create(self, validated_data):
-            favorite = Favorite(
-                user=validated_data["user"], prediction=validated_data["prediction"]
-            )
-            return favorite
+        fields = ("prediction")
