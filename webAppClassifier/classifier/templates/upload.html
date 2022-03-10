@@ -9,7 +9,7 @@
                 <form enctype="multipart/form-data" method="post">
                     {% csrf_token %}
                     <input name="imageFile" type="file"/>
-                    <input name="submit" type="submit" value="Upload"/>
+                <input name="submit" type="submit" value="Upload"/>
                 </form>
             </div>
         </div>
@@ -18,7 +18,7 @@
             <span class='logo'>Image Uploaded</span> </br>
             {% if predictions %}
             <img alt="{{file.name}}" src="{{file.url}}" style="max-height:100px; max-width:100px;">
-            <p> {{predictions}} {{ id }}</p>
+            <p> {{predictions}}</p>
             <!-- Button to Open the Modal -->
             <button class="btn btn-primary" data-target="#myModal" data-toggle="modal" type="button">
                 Was the prediction correct?
@@ -58,9 +58,9 @@
 
                     </div>
                 </div>  <!-- Button to Open the Modal -->
-
-                {% endif %}
             </div>
+            </div>
+            {% endif %}
         </div>
 </section>
 {% csrf_token %}

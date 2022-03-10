@@ -25,32 +25,105 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	</head>
-	<body>
+<body>
 <!-- Navigation Mobile type 1 -->
-			<nav class="header_menu_1 pt-30 pb-30 mt-30">
-				<div class="container px-xl-0 text-black">
-					<div class="row justify-content-center align-items-center f-18 medium">
-						<div class="col-lg-3 logo">
-							<a class="link color-heading" href="/"><span>Plant Classifier</span></a>
-						</div>
-						<div class="col-lg-6 text-center">
-							<a href="/#about" class="link color-heading mx-15">Overview</a>
-							<a href="/#contact" class="link color-heading mx-15">Contact</a>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-end align-items-center">
-							<a href="upload" class="btn sm action-1">Recognize flower</a>
-						</div>
-					</div>
+	<nav class="header_menu_1 pt-30 pb-30 mt-30">
+		<div class="container px-xl-0 text-black">
+			<div class="row justify-content-center align-items-center f-18 medium">
+				<div class="col-lg-3 logo">
+					<a class="link color-heading" href="/"><span>Plant Classifier</span></a>
 				</div>
-			</nav>
-			<div class="container">
+				<div class="col-lg-6 text-center">
+					<a href="/#about" class="link color-heading mx-15">Overview</a>
+					<a href="/#contact" class="link color-heading mx-15">Contact</a>
+					<a class="link color-heading mx-15" data-target="#loginModal" data-toggle="modal"  class="MainNavText" id="SignUp"
+       				href="#myModal">Sign In </a>
+					<a class="link color-heading mx-15" data-target="#sigUpModal" data-toggle="modal" class="MainNavText" id="SignUp"
+       				href="#myModal">Sign up</a>
+					<a href="/#classifier" class="link color-heading mx-15">Recognize Flower</a>
+				</div>
 			</div>
-
+		</div>
+	</nav>
 
         {% block content %}
         {% endblock %}
 
+		<!-- The Modal -->
+		<div class="modal" id="loginModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
 
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Access</h5>
+						<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label class="col-form-label" for="username_login">Userame</label>
+								<input class="form-control" id="username_login" name="username_login" required
+									   type="text">
+								<label class="col-form-label" for="password_login">Password</label>
+								<input class="form-control" id="password_login" name="password_login" required
+										type="password">
+							</div>
+						</form>
+					</div>
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+						<button class="btn btn-primary" onclick="login()"type="button">Login</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- The Sign-Up Modal -->
+		<div class="modal" id="sigUpModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Access</h5>
+						<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label class="col-form-label" for="username_register">Userame</label>
+								<input class="form-control" id="username_register" name="username_register" required
+									   type="text">
+								<label class="col-form-label" for="first_name_register">First name</label>
+								<input class="form-control" id="first_name_register" name="first_name_register" required
+										type="text">
+
+								<label class="col-form-label" for="last_name_register">Last Name</label>
+								<input class="form-control" id="last_name_register" name="last_name_register" required
+										type="text">
+
+								<label class="col-form-label" for="email_register">email</label>
+								<input class="form-control" id="email_register" name="email_register" required
+									type="email">
+								<label class="col-form-label" for="password_register">Password</label>
+								<input class="form-control" id="password_register" name="password_register" required
+										type="password">
+							</div>
+						</form>
+					</div>
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+						<button class="btn btn-primary" onclick="register()"type="button">Login</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 		<!-- Footer 11 -->
@@ -91,6 +164,55 @@
 				</div>
 			</div>
 		</footer>
+		{% csrf_token %}
+		<script>
+				const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		</script>
+		<script>
+			function login() {
+			  $.ajax({
+				url: "http://127.0.0.1:8000/api/token/",
+				type: "POST",
+				headers: {'X-CSRFToken': csrftoken},
+				mode: 'same-origin', // Do not send CSRF token to another domain.
+				data: {
+					"username": $("#username_login").val(),
+					"password": $('#password_login').val()
+				},
+				success: function(result) {
+				  alert('logged in');
+				},
+				error: function(error) {
+				  alert('ERROR WHILE SAVING FEEDBACK');
+				  console.log(error);
+				}
+			  });
+			}
+		</script>
 
+		<script>
+			function register() {
+			  $.ajax({
+				url: "http://127.0.0.1:8000/api/register",
+				type: "POST",
+				headers: {'X-CSRFToken': csrftoken},
+				mode: 'same-origin', // Do not send CSRF token to another domain.
+				data: {
+					"username": $("#username_register").val(),
+					"password":  $("#password_register").val(),
+					"first_name":  $("#first_name_register").val(),
+					"last_name": $("#last_name_register").val(),
+					"email": $("email_register").val()
+				},
+				success: function(result) {
+				  alert('registered');
+				},
+				error: function(error) {
+				  alert('ERROR WHILE SAVING FEEDBACK');
+				  console.log(error);
+				}
+			  });
+			}
+		</script>
 	</body>
 </html>
