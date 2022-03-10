@@ -54,4 +54,6 @@ class UserSerializer(serializers.ModelSerializer):
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favorite
-        fields = ("prediction")
+        fields = '__all__'
+        depth = 2
+

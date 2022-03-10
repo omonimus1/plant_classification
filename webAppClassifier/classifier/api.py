@@ -11,6 +11,7 @@ from .serializers import (
     UserSerializer,
     FavoriteSerializer,
 )
+from django.core import serializers
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from .import predictor
@@ -136,8 +137,8 @@ class FavoriteFlower(generics.GenericAPIView):
         Logged user is able to retrieve the list of favorite productions
         """
         user_id = request.user.id
-        user_favorites = Favorite.objects.filter(user=user_id)
-
+        user_favorites = serializers.serialize("json",Favorite.objects.filter(user=user_id).fields(''))
+        # print(user_favorites.user.username)
         return Response(
             {
                 "favorite": user_favorites,
