@@ -56,4 +56,3 @@ class FavoriteSerializer(serializers.ModelSerializer):
         model = Favorite
         fields = '__all__'
         depth = 2
-
