@@ -6,8 +6,8 @@ from django.shortcuts import render
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing import image
 from . import predictor
+from django.core.mail import send_mail
 from .models import Prediction
-
 module_dir = os.path.dirname(__file__)  # get current directory
 module_path = os.path.join(module_dir, "classifier.pkl")
 model = Sequential()
@@ -59,3 +59,18 @@ def Display(request):
 
 def thanks(request):
     return render(request, "thank-you.html")
+
+
+def contact(request):
+    if request.method == "POST":
+        message = request.POST["message"]
+        email = request.POST["email"]
+        send_mail(
+            "Email from Plat classifier",
+            message,
+            email,
+            ["davidepollicino2015@gmail.com"],
+            fail_silently=False,
+        )
+        return render(request, "index.html")
+    return render(request, "index.html")
