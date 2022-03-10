@@ -46,6 +46,9 @@ jobs:
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }} 
           DEBUG: ${{ secrets.DEBUG }} 
+          EMAIL_HOST: ${{ secrets.EMAIL_HOST }} 
+          EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }} 
+          EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }} 
         run: |
           python manage.py test
           pip install codecov && codecov -t ${{ secrets.CODCOV_TOKEN }} 
