@@ -13,10 +13,11 @@ from .serializers import (
 from django.core import serializers
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from .import predictor
+from . import predictor
 from django.core.files.storage import default_storage
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import Sequential
+
 module_dir = os.path.dirname(__file__)
 module_path = os.path.join(module_dir, "classifier.pkl")
 model = Sequential()
@@ -116,8 +117,8 @@ class FavoriteFlower(generics.GenericAPIView):
         """
         Logged user is able to add a flower to add a prediction to the list of favorites
         """
-        prediction_id = request.GET.get('prediction')
-        print('ID: ' + str(prediction_id))
+        prediction_id = request.GET.get("prediction")
+        print("ID: " + str(prediction_id))
         if Prediction.objects.filter(pk=prediction_id).exists():
             prediction = Prediction.objects.filter(pk=prediction_id).first()
             Favorite.objects.create(user=request.user, prediction=prediction)
@@ -127,7 +128,9 @@ class FavoriteFlower(generics.GenericAPIView):
             )
         else:
             return Response(
-                {"status": "Prediction not found - impossible to save your prediction as favorite"},
+                {
+                    "status": "Prediction not found - impossible to save your prediction as favorite"
+                },
                 status=status.HTTP_404_NOT_FOUND,
             )
 
@@ -136,7 +139,9 @@ class FavoriteFlower(generics.GenericAPIView):
         Logged user is able to retrieve the list of favorite productions
         """
         user_id = request.user.id
-        user_favorites = serializers.serialize("json", Favorite.objects.filter(user=user_id).fields(''))
+        user_favorites = serializers.serialize(
+            "json", Favorite.objects.filter(user=user_id).fields("")
+        )
         return Response(
             {
                 "favorite": user_favorites,

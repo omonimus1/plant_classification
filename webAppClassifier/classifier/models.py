@@ -9,7 +9,7 @@ class Prediction(models.Model):
     created_at = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
-        return self.name + ' ' + str(self.pk)
+        return self.name + " " + str(self.pk)
 
 
 class Result(models.Model):

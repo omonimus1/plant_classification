@@ -18,7 +18,7 @@ env = environ.Env()
 environ.Env.read_env()
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
-
+# CONTACT_EMAIL= env("CONTACT_EMAIL")
 
 ALLOWED_HOSTS = []
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -136,3 +136,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MAX_UPLOAD_SIZE = 150100
 
 ALLOWED_IMAGE_TYPES = ["image/png", "image/jpeg", "image/gif"]
+
+
+EMAIL_HOST= env("EMAIL_HOST")
+EMAIL_HOST_USER=env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD=env("EMAIL_HOST_PASSWORD")
+EMAIL_PORT=587
+EMAIL_USE_TLS=True

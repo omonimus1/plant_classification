@@ -98,7 +98,8 @@
 		<!-- Contact 2 -->
 		<section class="pt-80 pb-70 bg-light text-center contact_2" id="contact">
 			<div class="container px-xl-0">
-				<form action="" method="post">
+				<form action="contact" method="POST">
+					{% csrf_token %}
 					<div class="row justify-content-center">
 						<div class="col-xl-6 col-lg-8 col-md-10">
 							<div class="f-14 semibold text-uppercase sp-20 color-heading">Get Started</div>

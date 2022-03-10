@@ -6,6 +6,8 @@ from django.shortcuts import render
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing import image
 from . import predictor
+from django.core.mail import send_mail
+from django.http import HttpResponse
 from .models import Prediction
 
 module_dir = os.path.dirname(__file__)  # get current directory
@@ -59,3 +61,26 @@ def Display(request):
 
 def thanks(request):
     return render(request, "thank-you.html")
+
+
+def contact(request):
+    if request.method == "POST":
+        message = request.POST["message"]
+        email = request.POST["email"]
+        if message and email:
+            try:
+                send_mail(
+                    "Email from Plat classifier",
+                    message,
+                    email,
+                    ["davidepollicino2015@gmail.com"],
+                    fail_silently=False,
+                )
+            except Exception:
+                return HttpResponse("Error while sending email")
+            return HttpResponse("Thanks for have contact us")
+        else:
+            # In reality we'd use a form class
+            # to get proper validation errors.
+            return HttpResponse("Make sure all fields are entered and valid.")
+    return render(request, "index.html")
