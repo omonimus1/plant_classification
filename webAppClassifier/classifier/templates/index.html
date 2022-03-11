@@ -4,7 +4,7 @@
 {% block content %}
 
 		<!-- Feature 34 -->
-		<section class="pt-10 pb-120 bg-light feature_34">
+		<section class="pt-10 bg-light feature_34">
 			<div class="container px-xl-0">
 				<div class="row align-items-center text-center text-sm-left">
 					<div class="col-xl-1">
@@ -26,7 +26,7 @@
 		</section>
 
 		<!-- Application 2 -->
-		<section class="pt-65 pb-65 bg-light application_2" >
+		<section class="pt-45  bg-light application_2" >
 			<div class="container px-xl-0">
 				<div class="row justify-content-center justify-content-md-between align-items-center">
 					<div class="mb-15 mb-md-0 col-12 col-md-5 col-xl-6 d-flex justify-content-center">
@@ -36,7 +36,7 @@
 					<div class="col-md-7 col-xl-6">
 						<h2 class="col-lg-11 color-main" id="about">The flower recognizer</h2>
 						<div class="mt-25 col-lg-9 color-heading f-18 text-adaptive">
-							<p>You can both use our A.I. to recognize a flower from the <a href="#classifier">recognize section</a> , or by using our mobile application!</p>
+							<p>Use our AI to recognie a flower, save it as favourite and give us your feedback about the classification made!</p>
 						</div>
 						<div class="mt-95 row">
 
@@ -47,15 +47,15 @@
 
 							<div class="col-6 col-lg-4 pb-25 with_borders">
 								<img src="{% static 'i/application_2_img_5.png' %}"  alt="" class="pl-15" />
-								<div class="mt-15 col-xl-11 color-main f-14 bold sp-20 text-uppercase">Backend powered by Django and hosted on Heroku.</div>
+								<div class="mt-15 col-xl-11 color-main f-14 bold sp-20 text-uppercase">Powerful Backend powered by Django</div>
 							</div>
 							<div class="col-6 col-lg-4 pb-25 with_borders">
 								<img src="{% static 'i/application_2_img_6.png' %}" alt="" class="pl-15" />
-								<div class="mt-15 col-xl-11 color-main f-14 bold sp-20 text-uppercase">Frontend powered by HTML, CSS, JavaScript and Bootstap. </div>
+								<div class="mt-15 col-xl-11 color-main f-14 bold sp-20 text-uppercase">Responsive design powered by Bootstap. </div>
 							</div>
 							<div class="col-6 col-lg-4 pb-25 pt-35 with_borders">
 								<img src="{% static 'i/application_2_img_7.png' %}"  alt="" class="pl-15" />
-								<div class="mt-15 col-xl-11 color-main f-14 bold sp-20 text-uppercase">A.I. Realized with Tensorflow and Keras</div>
+								<div class="mt-15 col-xl-11 color-main f-14 bold sp-20 text-uppercase">A.I. Realized with Tensorflow, Keras and kaggle.com dataset</div>
 							</div>
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 
 
 <!-- Feature 22 -->
-<section class="pt-100 pb-100 bg-light feature_22" >
+<section class="pt-40 bg-light feature_22" >
 	<div class="container px-xl-0">
 		<div class="row flex-row-reverse justify-content-between">
 			<div class="col-lg-6 col-md-7">
@@ -96,13 +96,12 @@
 </section>
 
 		<!-- Contact 2 -->
-		<section class="pt-80 pb-70 bg-light text-center contact_2" id="contact">
+		<section class="pt-30 pb-30 bg-light text-center contact_2" id="contact">
 			<div class="container px-xl-0">
 				<form action="contact" method="POST">
 					{% csrf_token %}
 					<div class="row justify-content-center">
 						<div class="col-xl-6 col-lg-8 col-md-10">
-							<div class="f-14 semibold text-uppercase sp-20 color-heading">Get Started</div>
 							<h2 class="mt-20 mb-40 small">Get in Touch with Us</h2>
 							<div>
 								<textarea name="message" placeholder="Your message" required="required" class="input mb-30 w-full lg radius10 border-gray focus-action-1 color-heading placeholder-heading text-left"></textarea>
