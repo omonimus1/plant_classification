@@ -153,10 +153,10 @@ dmypy.json
 workspace.xml
 vsc.
 
-# htmlcov/
-# .coverage
-# .coverage.*
-# coverage.xml
-# *.cover
-# .vscode/
-# .pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.vscode/
+.pytest_cache/
