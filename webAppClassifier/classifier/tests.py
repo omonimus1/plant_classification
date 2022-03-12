@@ -2,6 +2,18 @@ from django.contrib.auth.models import AnonymousUser
 from django.test import RequestFactory, TestCase
 from django.core import mail
 from .views import Index, ImageView
+from django.contrib.auth.models import User
+from .models import Prediction
+from PIL import Image
+import io
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
+
+def create_image():
+    image = Image.new('RGBA', size=(50, 50), color=(256, 0, 0))
+    image_file = io.BytesIO(image.tobytes("hex", "rgb"))
+    file = InMemoryUploadedFile(image_file, None, 'test.jpg', 'image/jpg', 1024, None)
+    return file
 
 
 class ImageViewTestCase(TestCase):
@@ -41,3 +53,32 @@ class EmailTest(TestCase):
         )
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, "Subject here")
+
+
+class UserModelTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        User.objects.create(first_name='davide', last_name='pollicino',
+                            username='davidetest', email='davide@test.com', password='123456'
+                            )
+
+    def test_name_user(self):
+        user = User.objects.get(id=1)
+        self.assertEquals(user.first_name, 'davide')
+        self.assertEquals(user.last_name, 'pollicino')
+        self.assertEquals(user.username, 'davidetest')
+        self.assertEquals(user.email, 'davide@test.com')
+
+
+class PredictionModelTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        image = Image.new('RGBA', size=(50, 50), color=(256, 0, 0))
+        image_file = io.BytesIO(image.tobytes("hex", "rgb"))
+        file = InMemoryUploadedFile(image_file, None, 'test.jpg', 'image/jpg', 1024, None)
+        p = Prediction.objects.create(image=file, name='rose')
+        p.save()
+
+    def test_prediction_record(self):
+        prediction = Prediction.objects.get(pk=1)
+        self.assertEquals(prediction.name, 'rose')
