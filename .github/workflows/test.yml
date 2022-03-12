@@ -53,4 +53,6 @@ jobs:
           python manage.py makemigrations
           python manage.py migrate
           python manage.py test
+          coverage erase
+          coverage xml
           pip install codecov && codecov -t ${{ secrets.CODCOV_TOKEN }} 

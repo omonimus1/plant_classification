@@ -1,0 +1,15 @@
+omit =
+   migrations/
+   manage.py
+   __pycache__/
+   env/
+   venv/
+   iris_app.py
+   /usr/local/lib/python3.9/
+   __init__.py 
+   settings.py  
+
+
+
+
+
