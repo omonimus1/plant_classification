@@ -1,0 +1,16 @@
+ignore:
+  - "wireframes/**/*"  # ignore folders and all its contents
+  - "python3.9/**/*"
+  - "/usr/local/lib/python3.9/**/*"
+  - "__init__.py"
+  - "settings.py" 
+  - "migrations/"
+  - "db.sqlite3"
+  - "README.md"
+  - "manage.py"
+  - "webAppClassifier/__init__.py"
+  - "webAppClassifier/settings.py"
+  - "flake8"
+  - "Notebooks/"
+
+
