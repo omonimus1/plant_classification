@@ -7,7 +7,6 @@
 
 The current repository hosts Davide Pollicino Honours Project.The project (still under implementation),
 
-
 #### Project assets
 * Jupiter Notebook
 * [Web app](webAppClassifier/README.md)

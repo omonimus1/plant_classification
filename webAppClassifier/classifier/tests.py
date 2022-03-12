@@ -24,6 +24,12 @@ class IndexViewTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
+class ViewsTestCase(TestCase):
+    def test_index_loads_properly(self):
+        response = self.client.get('http://127.0.0.1:8000/')
+        self.assertEqual(response.status_code, 200)
+
+
 class EmailTest(TestCase):
     def test_send_email(self):
         mail.send_mail(

@@ -80,7 +80,5 @@ def contact(request):
                 return HttpResponse("Error while sending email")
             return HttpResponse("Thanks for have contact us")
         else:
-            # In reality we'd use a form class
-            # to get proper validation errors.
             return HttpResponse("Make sure all fields are entered and valid.")
     return render(request, "index.html")
