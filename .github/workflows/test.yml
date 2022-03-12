@@ -50,5 +50,7 @@ jobs:
           EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }} 
           EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }} 
         run: |
+          python manage.py makemigrations
+          python manage.py migrate
           python manage.py test
           pip install codecov && codecov -t ${{ secrets.CODCOV_TOKEN }} 

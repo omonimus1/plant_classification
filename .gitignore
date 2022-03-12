@@ -151,4 +151,12 @@ dmypy.json
 # PyCharm configuration
 .idea/
 workspace.xml
-vsc.xml
+vsc.
+
+# htmlcov/
+# .coverage
+# .coverage.*
+# coverage.xml
+# *.cover
+# .vscode/
+# .pytest_cache/

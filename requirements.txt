@@ -5,7 +5,7 @@ tensorflow
 matplotlib
 opencv-python
 pandas
-pillow
+Pillow
 django_rest_framework
 keras
 flake8
