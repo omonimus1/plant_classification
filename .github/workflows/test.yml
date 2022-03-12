@@ -39,11 +39,9 @@ jobs:
       - name: Check Code Quality
         working-directory: ./webAppClassifier
         run: flake8
-        
+
       - uses: codecov/codecov-action@v2
       - name: Run Tests and Upload coverage testing
-        with:           
-          fail_ci_if_error: true
         working-directory: ./webAppClassifier
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }} 
