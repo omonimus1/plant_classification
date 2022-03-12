@@ -40,8 +40,8 @@ jobs:
         working-directory: ./webAppClassifier
         run: flake8
         
+      - uses: codecov/codecov-action@v2
       - name: Run Tests and Upload coverage testing
-        uses: codecov/codecov-action@v2
         with:           
           fail_ci_if_error: true
         working-directory: ./webAppClassifier
