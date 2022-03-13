@@ -38,7 +38,7 @@
 					<a href="/#contact" class="link color-heading mx-15">Contact</a>
 					{% if user.is_authenticated %}
 						<a class="link color-heading mx-5"   class="MainNavText"  href="favorite">My Favorites </a>
-						<a class="link color-heading mx-5"  class="MainNavText"  href={% url 'logout' %}">Logout </a>
+						<a class="link color-heading mx-5"  class="MainNavText"  href="logout">Logout </a>
 					{% else %}
 					  	<a class="link color-heading mx-5" data-target="#loginModal" data-toggle="modal"  class="MainNavText" id="SignIp" href="#myModal">Sign In </a>
 						<a class="link color-heading mx-5" data-target="#sigUpModal" data-toggle="modal" class="MainNavText" id="SignUp" href="#myModal">Sign up</a>
@@ -66,7 +66,8 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form action="login" method="POST">
+							{% csrf_token %}
 							<div class="form-group">
 								<label class="col-form-label" for="username_login">Userame</label>
 								<input class="form-control" id="username_login" name="username_login" required
@@ -75,13 +76,16 @@
 								<input class="form-control" id="password_login" name="password_login" required
 										type="password">
 							</div>
+							<button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+							<button class="btn btn-primary" type="submit">Login</button>
 						</form>
 					</div>
-					<!-- Modal footer -->
+
+					<!-- Modal footer
 					<div class="modal-footer">
 						<button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
 						<button class="btn btn-primary" onclick="login()"type="button">Login</button>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
@@ -186,6 +190,8 @@
 				},
 				success: function(result) {
 				  alert('logged in');
+				  // Authenticate user
+				  print(result);
 				},
 				error: function(error) {
 				  alert('ERROR WHILE SAVING FEEDBACK');

@@ -8,8 +8,9 @@ from tensorflow.keras.preprocessing import image
 from . import predictor
 from django.core.mail import send_mail
 from django.http import HttpResponse
+from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from .models import Prediction
-
+from django.contrib.auth import logout
 module_dir = os.path.dirname(__file__)  # get current directory
 module_path = os.path.join(module_dir, "classifier.pkl")
 model = Sequential()
@@ -63,7 +64,21 @@ def thanks(request):
     return render(request, "thank-you.html")
 
 
-def logout(request):
+def loginView(request):
+    if request.method == "POST":
+        username = request.POST["username_login"]
+        password = request.POST["password_login"]
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return render(request, 'index.html')
+
+
+def favoriteView(request):
+    # get All my favorite
+    return render(request, "favorite.html")
+
+
+def logoutView(request):
     logout(request)
     return render(request, "index.html")
 
