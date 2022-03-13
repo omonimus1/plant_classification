@@ -27,19 +27,23 @@
 	</head>
 <body>
 <!-- Navigation Mobile type 1 -->
-	<nav class="header_menu_1 pt-30 pb-30 mt-30">
+	<nav class="header_menu_1 pt-20 pb-30 mt-20">
 		<div class="container px-xl-0 text-black">
 			<div class="row justify-content-center align-items-center f-18 medium">
-				<div class="col-lg-3 logo">
+				<div class="col-lg-2 logo">
 					<a class="link color-heading" href="/"><span>Plant Classifier</span></a>
 				</div>
 				<div class="col-lg-6 text-center">
 					<a href="/#about" class="link color-heading mx-15">Overview</a>
 					<a href="/#contact" class="link color-heading mx-15">Contact</a>
-					<a class="link color-heading mx-15" data-target="#loginModal" data-toggle="modal"  class="MainNavText" id="SignUp"
-       				href="#myModal">Sign In </a>
-					<a class="link color-heading mx-15" data-target="#sigUpModal" data-toggle="modal" class="MainNavText" id="SignUp"
-       				href="#myModal">Sign up</a>
+					{% if user.is_authenticated %}
+						<a class="link color-heading mx-5"   class="MainNavText"  href="favorite">My Favorites </a>
+						<a class="link color-heading mx-5"  class="MainNavText"  href="logout">Logout </a>
+					{% else %}
+					  	<a class="link color-heading mx-5" data-target="#loginModal" data-toggle="modal"  class="MainNavText" id="SignIp" href="#myModal">Sign In </a>
+						<a class="link color-heading mx-5" data-target="#sigUpModal" data-toggle="modal" class="MainNavText" id="SignUp" href="#myModal">Sign up</a>
+					{% endif %}
+
 					<a href="/#classifier" class="link color-heading mx-15">Recognize Flower</a>
 				</div>
 			</div>
@@ -88,7 +92,7 @@
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Login</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Sign-up</h5>
 						<button aria-label="Close" class="close" data-dismiss="modal" type="button">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -120,7 +124,7 @@
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-						<button class="btn btn-primary" onclick="register()"type="button">Login</button>
+						<button class="btn btn-primary" onclick="register()"type="button">Register</button>
 					</div>
 				</div>
 			</div>
