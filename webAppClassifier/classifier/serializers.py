@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-from .models import Prediction, Result, Favorite
+from .models import Prediction, Result, FavoritePrediction
 from django.contrib.auth.hashers import make_password
 
 
@@ -59,6 +59,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Favorite
+        model = FavoritePrediction
         fields = "__all__"
         depth = 2
