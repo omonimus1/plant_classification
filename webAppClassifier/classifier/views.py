@@ -6,6 +6,7 @@ from django.shortcuts import render
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing import image
 from . import predictor
+from .models import FavoritePrediction
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
@@ -75,7 +76,8 @@ def loginView(request):
 
 def favoriteView(request):
     # get All my favorite
-    return render(request, "favorite.html")
+    user_favorite = FavoritePrediction.objects.filter(user=request.user.pk)
+    return render(request, "favorite.html", { "favorite": user_favorite,},)
 
 
 def logoutView(request):

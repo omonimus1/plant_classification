@@ -5,14 +5,21 @@
 {% block content %}
     <div class="container" style="min-height: 50vh;">
         <!-- If there are no favorite, show message -->
-        <div class="row">
-            <div class="card" style="width: 18rem; padding: 2rem;">
-              <img class="card-img-top" src="" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-              </div>
-            </div>
-        </div>
+        {% if favorite %}
+          <div class="row">
+            {% for favorite_element in favorite %}
+                  <div class="card" style="width: 18rem; padding: 2rem;">
+                    <img class="card-img-top" src="{{favorite_element.prediction.image.url}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{favorite_element.prediction.name}}</h5>
+                    </div>
+                  </div>
+              
+            {% endfor %}
+          </div>
+        {% endif %}
     </div>
+    
+
 
 {% endblock %}
