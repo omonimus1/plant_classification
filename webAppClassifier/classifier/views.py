@@ -63,6 +63,11 @@ def thanks(request):
     return render(request, "thank-you.html")
 
 
+def logout(request):
+    logout(request)
+    return render(request, "index.html")
+
+
 def contact(request):
     if request.method == "POST":
         message = request.POST["message"]
