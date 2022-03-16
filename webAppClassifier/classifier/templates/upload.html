@@ -21,7 +21,7 @@
             <p> {{predictions}}</p>
                 
             {% if user.is_authenticated %}
-                <button class="btn btn-primary" onclick="saveAsFavorite({{id}})"  type="button">Save as favorite</button>
+                <button class="btn btn-primary" onclick="saveAsFavorite({{id}})"  type="submit">Save as favorite</button>
             {% endif %}
             
             <!-- Button to Open the Modal -->
@@ -72,20 +72,20 @@
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 </script>
 <script>
-    function saveAsFavorite(id, USERNAME, PASSWORD) {
+    function saveAsFavorite(id) {
       var prediction_id = id;
-      print(prediction_id);
+      console.log('token' + csrftoken);
+      console.log(prediction_id);
       $.ajax({
         url: "http://127.0.0.1:8000/api/favorite",
         type: "POST",
-        headers: {'X-CSRFToken': csrftoken, 'api-csrftoken':'{{ csrf_token }}'},
+        headers: {'X-CSRFToken': csrftoken},
         mode: 'same-origin', // Do not send CSRF token to another domain.
         data: {
             "prediction": prediction_id,
         },
         success: function(result) {
           alert('Feebback saved');
-          // Reload current page
         },
         error: function(error) {
           alert('ERROR WHILE SAVING FEEDBACK');
