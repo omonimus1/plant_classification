@@ -2,7 +2,8 @@ from rest_framework import serializers
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-from .models import Prediction, Result, Favorite
+from .models import Prediction, Result, FavoritePrediction
+from django.contrib.auth.hashers import make_password
 
 
 class PredictionSerializer(serializers.ModelSerializer):
@@ -28,16 +29,21 @@ class LeaveFeedbackSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id", "username", "password", "first_name", "last_name", "password")
-        # extra_kwargs = {
-        #    'password':{'write_only': True},
-        # }
+        fields = ("username", "email", "first_name", "last_name", "password")
+
+        def validate(self, attrs):
+            if len(attrs["password"]) < 8:
+                raise serializers.ValidationError(
+                    {"password": "Password must be at least 8 characters long"}
+                )
+            return True
 
         def create(self, validated_data):
-            user = User(
+            user = User.objects.create(
                 username=validated_data["username"],
                 password=make_password(validated_data["password"]),
                 first_name=validated_data["first_name"],
+                email=validated_data['email'],
                 last_name=validated_data["last_name"],
             )
             user.set_password(make_password(validated_data["password"]))
@@ -53,6 +59,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Favorite
+        model = FavoritePrediction
         fields = "__all__"
         depth = 2

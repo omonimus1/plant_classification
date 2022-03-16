@@ -19,6 +19,11 @@
             {% if predictions %}
             <img alt="{{file.name}}" src="{{file.url}}" style="max-height:100px; max-width:100px;">
             <p> {{predictions}}</p>
+                
+            {% if user.is_authenticated %}
+                <button class="btn btn-primary" onclick="saveAsFavorite({{id}})"  type="button">Save as favorite</button>
+            {% endif %}
+            
             <!-- Button to Open the Modal -->
             <button class="btn btn-primary" data-target="#myModal" data-toggle="modal" type="button">
                 Was the prediction correct?
@@ -65,6 +70,29 @@
 {% csrf_token %}
 <script>
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+</script>
+<script>
+    function saveAsFavorite(id, USERNAME, PASSWORD) {
+      var prediction_id = id;
+      print(prediction_id);
+      $.ajax({
+        url: "http://127.0.0.1:8000/api/favorite",
+        type: "POST",
+        headers: {'X-CSRFToken': csrftoken, 'api-csrftoken':'{{ csrf_token }}'},
+        mode: 'same-origin', // Do not send CSRF token to another domain.
+        data: {
+            "prediction": prediction_id,
+        },
+        success: function(result) {
+          alert('Feebback saved');
+          // Reload current page
+        },
+        error: function(error) {
+          alert('ERROR WHILE SAVING FEEDBACK');
+          console.log(error);
+        }
+      });
+    }
 </script>
 <script>
     function UploadFeedback() {

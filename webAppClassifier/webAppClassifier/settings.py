@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 import environ
-
 env = environ.Env()
 environ.Env.read_env()
 SECRET_KEY = env("SECRET_KEY")
@@ -148,3 +147,10 @@ EMAIL_HOST_USER=env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD=env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
+
+"""
+LOGIN_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL = 
+"""

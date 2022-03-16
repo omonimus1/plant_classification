@@ -1,9 +1,10 @@
 import os
 import pickle
 import numpy as np
+from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from rest_framework import status
 from rest_framework.response import Response
-from .models import Result, Prediction, Favorite
+from .models import Result, Prediction, FavoritePrediction
 from .serializers import (
     LeaveFeedbackSerializer,
     RegisterSerializer,
@@ -121,7 +122,7 @@ class FavoriteFlower(generics.GenericAPIView):
         print("ID: " + str(prediction_id))
         if Prediction.objects.filter(pk=prediction_id).exists():
             prediction = Prediction.objects.filter(pk=prediction_id).first()
-            Favorite.objects.create(user=request.user, prediction=prediction)
+            FavoritePrediction.objects.create(user=request.user, prediction=prediction)
             return Response(
                 {"status": "Prediction saved"},
                 status=status.HTTP_200_OK,
@@ -140,7 +141,7 @@ class FavoriteFlower(generics.GenericAPIView):
         """
         user_id = request.user.id
         user_favorites = serializers.serialize(
-            "json", Favorite.objects.filter(user=user_id).fields("")
+            "json", FavoritePrediction.objects.filter(user=user_id).fields("")
         )
         return Response(
             {
