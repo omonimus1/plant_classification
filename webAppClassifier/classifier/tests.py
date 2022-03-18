@@ -3,7 +3,7 @@ from django.test import RequestFactory, TestCase
 from django.core import mail
 from .views import Index, ImageView
 from django.contrib.auth.models import User
-from .models import Prediction, Result, Favorite
+from .models import Prediction, Result, FavoritePrediction
 from PIL import Image
 import io
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -123,11 +123,11 @@ class FavoriteModelTest(TestCase):
             password="123456",
         )
         user.save()
-        favorite = Favorite.objects.create(user=user, prediction=p)
+        favorite = FavoritePrediction.objects.create(user=user, prediction=p)
         favorite.save()
 
     def test_feedback_record(self):
-        favorite = Favorite.objects.get(pk=1)
+        favorite = FavoritePrediction.objects.get(pk=1)
         self.assertEquals(favorite.user.username, "davide")
         self.assertEquals(favorite.prediction.name, "rose")
         self.assertEquals(favorite.user.first_name, "davide")
