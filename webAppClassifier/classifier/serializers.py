@@ -3,7 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from .models import Prediction, Result, FavoritePrediction
-from django.contrib.auth.hashers import make_password
 
 
 class PredictionSerializer(serializers.ModelSerializer):
@@ -43,7 +42,7 @@ class RegisterSerializer(serializers.ModelSerializer):
                 username=validated_data["username"],
                 password=make_password(validated_data["password"]),
                 first_name=validated_data["first_name"],
-                email=validated_data['email'],
+                email=validated_data["email"],
                 last_name=validated_data["last_name"],
             )
             user.set_password(make_password(validated_data["password"]))

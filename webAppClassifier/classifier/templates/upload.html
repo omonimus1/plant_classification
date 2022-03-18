@@ -19,11 +19,11 @@
             {% if predictions %}
             <img alt="{{file.name}}" src="{{file.url}}" style="max-height:100px; max-width:100px;">
             <p> {{predictions}}</p>
-                
+
             {% if user.is_authenticated %}
                 <button class="btn btn-primary" onclick="saveAsFavorite({{id}})"  type="submit">Save as favorite</button>
             {% endif %}
-            
+
             <!-- Button to Open the Modal -->
             <button class="btn btn-primary" data-target="#myModal" data-toggle="modal" type="button">
                 Was the prediction correct?

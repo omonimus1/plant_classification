@@ -19,6 +19,7 @@ class Result(models.Model):
     def __str__(self):
         return self.expected_result
 
+
 class FavoritePrediction(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     prediction = models.ForeignKey(Prediction, on_delete=models.DO_NOTHING)

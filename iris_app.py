@@ -3,8 +3,8 @@ import pandas as pd
 import joblib
 from PIL import Image
 
-#Loading Our final trained Knn model
-model= open("Knn_Classifier.pkl", "rb")
+# Loading Our final trained Knn model
+modeltri= open("Knn_Classifier.pkl", "rb")
 knn_clf=joblib.load(model)
 
 

@@ -3,7 +3,7 @@ ignore:
   - "python3.9/**/*"
   - "/usr/local/lib/python3.9/**/*"
   - "__init__.py"
-  - "settings.py" 
+  - "settings.py"
   - "migrations/"
   - "db.sqlite3"
   - "README.md"
@@ -12,5 +12,3 @@ ignore:
   - "webAppClassifier/settings.py"
   - "flake8"
   - "Notebooks/"
-
-

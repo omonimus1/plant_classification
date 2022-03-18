@@ -9,9 +9,10 @@ from . import predictor
 from .models import FavoritePrediction
 from django.core.mail import send_mail
 from django.http import HttpResponse
-from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
+from django.contrib.auth import login, authenticate
 from .models import Prediction
 from django.contrib.auth import logout
+
 module_dir = os.path.dirname(__file__)  # get current directory
 module_path = os.path.join(module_dir, "classifier.pkl")
 model = Sequential()
@@ -71,13 +72,19 @@ def loginView(request):
         password = request.POST["password_login"]
         user = authenticate(username=username, password=password)
         login(request, user)
-        return render(request, 'index.html')
+        return render(request, "index.html")
 
 
 def favoriteView(request):
     # get All my favorite
     user_favorite = FavoritePrediction.objects.filter(user=request.user.pk)
-    return render(request, "favorite.html", { "favorite": user_favorite,},)
+    return render(
+        request,
+        "favorite.html",
+        {
+            "favorite": user_favorite,
+        },
+    )
 
 
 def logoutView(request):
