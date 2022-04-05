@@ -46,11 +46,16 @@ def ImageView(request):
             name=predictor.flower_identification[pred_digits[0]], image=file
         )
         p.save()
+        print("----- PREDICTION-----------")
+        print(predictor.flower_identification[pred_digits[0]] + ': ' + str(pred_digits[0]))
+        print("----- END PREDICTION-----------")
+
         return render(
             request,
             "upload.html",
             {
-                "predictions": predictor.flower_identification[pred_digits[0]],
+                # "predictions": predictor.flower_identification[pred_digits[0]],
+                "predictions": pred_digits[0],
                 "id": p.pk,
             },
         )

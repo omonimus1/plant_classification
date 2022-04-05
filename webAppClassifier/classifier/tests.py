@@ -45,14 +45,16 @@ class ViewsTestCase(TestCase):
 class EmailTest(TestCase):
     def test_send_email(self):
         mail.send_mail(
-            "Subject here",
-            "Here is the message.",
-            "from@example.com",
-            ["to@example.com"],
+            "New Email from flower classifier web app",
+            "Hi Davide, this is a test email",
+            "flowerclassifier@gmail.com",
+            ["davidepollicino2015@gmail.com.com"],
             fail_silently=False,
         )
         self.assertEqual(len(mail.outbox), 1)
-        self.assertEqual(mail.outbox[0].subject, "Subject here")
+        self.assertEqual(
+            mail.outbox[0].subject, "New Email from flower classifier web app"
+        )
 
 
 class UserModelTest(TestCase):
