@@ -21,8 +21,8 @@ The machine learning model, is the the integrated and used in a Django Web APP, 
 
 
 
-
-
+## Apply for a mentorship session with me (get a 7 days free trial)
+<a href="https://mentorcruise.com/mentor/davidepollicino/"> <img src="https://cdn.mentorcruise.com/img/banner/navy-mentoring-badge.svg" width="240" alt="MentorCruise"> </a>
 
 
 <!--<img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"> -->
